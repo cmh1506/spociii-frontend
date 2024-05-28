@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +7,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(public apiService: ApiService){}
+  constructor(public authService: AuthService){}
   registerData = {
     email: '',
     pwd: '',
@@ -16,6 +16,6 @@ export class RegisterComponent {
   }
   post() {
     console.log(this.registerData)
-    this.apiService.sendUserRegistration(this.registerData)
+    this.authService.registerUser(this.registerData)
   }
 }

@@ -8,7 +8,8 @@ import { ApiService } from './api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MessagesComponent } from './messages/messages.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,10 +17,18 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { UsersComponent } from './users/users.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PostComponent } from './post/post.component';
+import { AuthService } from './auth.service';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 const routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'users', component: UsersComponent},
+  {path: 'profile/:id', component: ProfileComponent},
+  {path: 'posts', component: PostComponent},
 ]
 
 
@@ -28,7 +37,10 @@ const routes = [
     AppComponent,
     MessagesComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent,
+    ProfileComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +54,14 @@ const routes = [
     MatInputModule,
     FormsModule,
     MatFormFieldModule,
+    MatListModule,
     RouterModule.forRoot(routes)    
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
