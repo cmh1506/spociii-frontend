@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Neue Verpackung anlegen:
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form novalidate class="register-form" name="register-form">
+      
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="verpackungData.name" name="name" placeholder="name" type="name">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>Beschreibung</mat-label>
+        <textarea matInput [(ngModel)]="verpackungData.beschreibung" name="description" placeholder="description"
+          type="description"></textarea>
+      </mat-form-field>
+      <br>
+      <br>
+
+      <button (click)="save()" mat-flat-button color="primary">Speichern</button>
+    </form>
+  </mat-card-content>
+</mat-card>

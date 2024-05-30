@@ -15,7 +15,6 @@ export class RegisterComponent {
     description: ''
   }
   post() {
-    console.log(this.registerData)
     this.authService.registerUser(this.registerData)
   }
 }
