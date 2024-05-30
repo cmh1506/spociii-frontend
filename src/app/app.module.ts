@@ -23,9 +23,11 @@ import { PostComponent } from './post/post.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { of } from 'rxjs';
+import { VerpackungFormComponent } from './verpackung-form/verpackung-form.component';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
+  { path: 'verpackung', component: VerpackungFormComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'users',
@@ -47,7 +49,8 @@ const routes = [
     LoginComponent,
     UsersComponent,
     ProfileComponent,
-    PostComponent
+    PostComponent,
+    VerpackungFormComponent
   ],
   imports: [
     BrowserModule,

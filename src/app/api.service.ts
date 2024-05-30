@@ -1,5 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { tick } from "@angular/core/testing";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -7,7 +8,8 @@ import { environment } from "src/environments/environment";
   providedIn: 'root'
 })
 export class ApiService {  
-  path = "https://spociii-backend.azurewebsites.net/"
+  //path = "https://spociii-backend.azurewebsites.net/"
+  path = environment.path
   messages = []
   users = []
   constructor(private httpClient: HttpClient){}
@@ -22,6 +24,14 @@ export class ApiService {
       this.messages = res
     })
   }
+
+  createVerpackung(verpackung: any){
+    console.log(this.path)
+    this.httpClient.post(this.path + '/verpackung', verpackung).subscribe((res: any) => {
+      this.messages = res
+    })
+  }
+
   getUsers() {
     this.httpClient.get(this.path + '/users').subscribe((res: any) => {
       this.users = res

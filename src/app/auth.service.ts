@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  path = "https://spociii-backend.azurewebsites.net/auth"
+  //path = "https://spociii-backend.azurewebsites.net/auth"
+  path = environment.path + "/auth"
 
   TOKEN: string = 'token'
 
