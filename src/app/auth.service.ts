@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   //path = "https://spociii-backend.azurewebsites.net/auth"
   path = environment.path + "/auth"
+  //path = "localhost:3000/auth"
 
   TOKEN: string = 'token'
 

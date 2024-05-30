@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  path: "localhost:3000"
+  path: "http://localhost:3000"
+  //path: "https://spociii-backend.azurewebsites.net/"
 }
