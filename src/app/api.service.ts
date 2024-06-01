@@ -6,6 +6,8 @@ import { environment } from "src/environments/environment";
 import { Material } from "./models/material";
 import { Energierueckgewinnung } from "./models/energierueckgewinnung";
 import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
+import { Transportmittel } from "./models/transportmittel";
+import { Verarbeitung } from "./models/verarbeitung";
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,24 @@ export class ApiService {
     }
     else
       return this.httpClient.put<NutzenergieCO2Equivalent>(this.path + '/nutzenergieCO2Equivalent', nutzenergieCO2Equivalent)
+  }
+
+  saveTransportmittel(transportmittel: Partial<Transportmittel>): Observable<Transportmittel> {
+    if (!transportmittel.id || transportmittel.id === '') {
+      let newTransportmittel: Partial<Transportmittel> = { ...transportmittel };
+      return this.httpClient.post<Transportmittel>(this.path + '/transportmittel', newTransportmittel)
+    }
+    else
+      return this.httpClient.put<Transportmittel>(this.path + '/transportmittel', transportmittel)
+  }
+
+  saveVerarbeitung(verarbeitung: Partial<Verarbeitung>): Observable<Verarbeitung> {
+    if (!verarbeitung.id || verarbeitung.id === '') {
+      let newVerarbeitung: Partial<Verarbeitung> = { ...verarbeitung };
+      return this.httpClient.post<Verarbeitung>(this.path + '/verarbeitung', newVerarbeitung)
+    }
+    else
+      return this.httpClient.put<Verarbeitung>(this.path + '/verarbeitung', verarbeitung)
   }
 
 }

@@ -1,5 +1,5 @@
 export interface NutzenergieCO2Equivalent {
-  id: string
+  id: string,
   energietraeger: String,
   co2ProKWh: Number,
   co2ProKJ: Number

@@ -27,6 +27,8 @@ import { VerpackungFormComponent } from './verpackung-form/verpackung-form.compo
 import { MaterialFormComponent } from './material-form/material-form.component';
 import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
 import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
+import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
+import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -34,6 +36,8 @@ const routes = [
   { path: 'verpackung', component: VerpackungFormComponent },
   { path: 'energierueckgewinnung', component: EnergierueckgewinnungFormComponent },
   { path: 'nutzenergieCO2Equivalent', component: NutzenergieCO2EquivalentFormComponent },
+  { path: 'transportmittel', component: TransportmittelFormComponent },
+  { path: 'verarbeitung', component: VerarbeitungFormComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'users',
@@ -59,7 +63,9 @@ const routes = [
     VerpackungFormComponent,
     MaterialFormComponent,
     EnergierueckgewinnungFormComponent,
-    NutzenergieCO2EquivalentFormComponent
+    NutzenergieCO2EquivalentFormComponent,
+    TransportmittelFormComponent,
+    VerarbeitungFormComponent
   ],
   imports: [
     BrowserModule,
