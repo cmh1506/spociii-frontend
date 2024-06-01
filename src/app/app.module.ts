@@ -13,7 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -24,11 +24,16 @@ import { AuthService } from './auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { of } from 'rxjs';
 import { VerpackungFormComponent } from './verpackung-form/verpackung-form.component';
+import { MaterialFormComponent } from './material-form/material-form.component';
+import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
+import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
 
 const routes = [
-  { path: 'verpackung', component: VerpackungFormComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'material', component: MaterialFormComponent },
   { path: 'verpackung', component: VerpackungFormComponent },
+  { path: 'energierueckgewinnung', component: EnergierueckgewinnungFormComponent },
+  { path: 'nutzenergieCO2Equivalent', component: NutzenergieCO2EquivalentFormComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'users',
@@ -51,7 +56,10 @@ const routes = [
     UsersComponent,
     ProfileComponent,
     PostComponent,
-    VerpackungFormComponent
+    VerpackungFormComponent,
+    MaterialFormComponent,
+    EnergierueckgewinnungFormComponent,
+    NutzenergieCO2EquivalentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,8 @@ const routes = [
     FormsModule,
     MatFormFieldModule,
     MatListModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,
