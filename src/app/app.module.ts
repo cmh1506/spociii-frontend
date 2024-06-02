@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,6 +30,7 @@ import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form
 import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
 import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
 import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -81,7 +83,9 @@ const routes = [
     MatFormFieldModule,
     MatListModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatSidenavModule
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,
