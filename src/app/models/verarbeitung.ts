@@ -1,6 +1,6 @@
 export interface Verarbeitung {
   id: string,
-  name: String,
+  name: string,
   strom: Number,
   waerme: Number  
 }

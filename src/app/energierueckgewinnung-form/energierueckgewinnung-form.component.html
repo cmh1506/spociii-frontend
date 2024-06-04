@@ -1,12 +1,5 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          Neue Energierückgewinnung anlegen:
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+  <mat-drawer mode="side" opened>    
         <form [formGroup]="energierueckgewinnungForm" (ngSubmit)="saveEnergierueckgewinnung()">
 
           <br>
@@ -40,20 +33,14 @@
             <button type="submit" mat-flat-button color="primary"
               [disabled]="energierueckgewinnungForm.invalid">Speichern</button>
           </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
+        </form>     
   </mat-drawer>
-  <mat-drawer-content>
-    <mat-card>
-      <!-- <mat-card-header>
-        <mat-card-title>
-          Neue Energierückgewinnung anlegen:
-        </mat-card-title>
-      </mat-card-header> -->
-      <mat-card-content>
-      </mat-card-content>
-    </mat-card>
+  <mat-drawer-content *ngIf="energierueckgewinnungs$ | async as energierueckgewinnungs">
+    <div *ngFor="let erni of energierueckgewinnungs">
+      <mat-card>
+        <mat-card-content >{{erni["name"]}}</mat-card-content>
+      </mat-card>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
 

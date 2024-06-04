@@ -5,23 +5,47 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form novalidate class="register-form" name="register-form">
+    <form [formGroup]="verpackungForm">
       
       <br>
       <mat-form-field class="register-full-width">
         <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="verpackungData.name" name="name" placeholder="name" type="name">
+        <input matInput formControlName="name" name="name" placeholder="name" type="text">
       </mat-form-field>
-      <br>
       <mat-form-field class="register-full-width">
         <mat-label>Beschreibung</mat-label>
-        <textarea matInput [(ngModel)]="verpackungData.beschreibung" name="description" placeholder="description"
-          type="description"></textarea>
+        <textarea matInput formControlName="beschreibung" name="beschreibung"></textarea>
       </mat-form-field>
       <br>
       <br>
 
-      <button (click)="save()" mat-flat-button color="primary">Speichern</button>
+      <div class="buttons">
+        <button mat-flat-button color="primary">Cancel</button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="verpackungForm.invalid" (click)="saveVerpackung()">Speichern</button>
+      </div>
+      <section>
+        <nav>Schichten</nav>
+        <div formArrayName="materialverwendungs">
+          <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index" [formGroupName]="i" class="flex-column">
+            <div class="flex-group">
+              <mat-form-field class="mat-verw-form-input">
+                <mat-label>Materialmenge [g]</mat-label>
+                <input formControlName="menge" matInput>
+              </mat-form-field>              
+              <mat-form-field class="mat-verw-form-input">
+                <mat-label>Dicke [µm] / Flächengewicht</mat-label>
+                <input matInput formControlName="dicke">
+              </mat-form-field>
+              <button mat-icon-button aria-label="Example icon-button with a menu">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </form>
   </mat-card-content>
 </mat-card>

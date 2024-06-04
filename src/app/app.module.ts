@@ -31,11 +31,15 @@ import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equival
 import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
 import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatTabsModule} from '@angular/material/tabs';
+import { VerpackungListComponent } from './verpackung-list/verpackung-list.component';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'material', component: MaterialFormComponent },
+  { path: 'verpackung/:_id', component: VerpackungFormComponent },
   { path: 'verpackung', component: VerpackungFormComponent },
+  { path: 'verpackungs', component: VerpackungListComponent },
   { path: 'energierueckgewinnung', component: EnergierueckgewinnungFormComponent },
   { path: 'nutzenergieCO2Equivalent', component: NutzenergieCO2EquivalentFormComponent },
   { path: 'transportmittel', component: TransportmittelFormComponent },
@@ -67,7 +71,8 @@ const routes = [
     EnergierueckgewinnungFormComponent,
     NutzenergieCO2EquivalentFormComponent,
     TransportmittelFormComponent,
-    VerarbeitungFormComponent
+    VerarbeitungFormComponent,
+    VerpackungListComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,8 @@ const routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTabsModule
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

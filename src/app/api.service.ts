@@ -1,19 +1,19 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { tick } from "@angular/core/testing";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Material } from "./models/material";
 import { Energierueckgewinnung } from "./models/energierueckgewinnung";
 import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
 import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
+import { MaterialverwendungEingabe } from "./models/materialverwendungEingabe";
+import { Verpackung } from "./models/Verpackung";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  //path = "https://spociii-backend.azurewebsites.net/"
   path = environment.path
   messages = []
   users = []
@@ -67,6 +67,18 @@ export class ApiService {
       return this.httpClient.put<Energierueckgewinnung>(this.path + '/energierueckgewinnung', energierueckgewinnung)
   }
 
+  energierueckgewinnungs$ = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
+  .pipe(
+    tap(data => console.log('Energierueckgewinnungs: ', JSON.stringify(data)))
+  );
+
+  verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+
+  getVerpackung(_id: string) {
+    return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)
+  }
+  
+
   saveNutzenergieCO2Equivalent(nutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent>): Observable<NutzenergieCO2Equivalent> {
     if (!nutzenergieCO2Equivalent.id || nutzenergieCO2Equivalent.id === '') {
       let newNutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent> = { ...nutzenergieCO2Equivalent };
@@ -92,6 +104,25 @@ export class ApiService {
     }
     else
       return this.httpClient.put<Verarbeitung>(this.path + '/verarbeitung', verarbeitung)
+  } //materialverwendungEingabe
+
+
+  saveVerpackung(verpackung: Partial<Verpackung>): Observable<Verpackung> {
+    if (!verpackung._id || verpackung._id === '') {
+      let newVerpackung: Partial<Verpackung> = { ...verpackung };
+      return this.httpClient.post<Verpackung>(this.path + '/verpackung', newVerpackung)
+    }
+    else
+      return this.httpClient.put<Verpackung>(this.path + '/verpackung', verpackung)
+  }
+
+  saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
+    if (!materialverwendungEingabe.id || materialverwendungEingabe.id === '') {
+      let newMaterialverwendungEingabe: Partial<MaterialverwendungEingabe> = { ...materialverwendungEingabe };
+      return this.httpClient.post<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', newMaterialverwendungEingabe)
+    }
+    else
+      return this.httpClient.put<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', materialverwendungEingabe)
   }
 
 }

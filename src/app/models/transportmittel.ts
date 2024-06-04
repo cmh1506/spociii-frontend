@@ -1,6 +1,6 @@
 export interface Transportmittel {
   id: string
-  name: String,
+  name: string,
   stromanteil: Number,
   energie: Number,
 }

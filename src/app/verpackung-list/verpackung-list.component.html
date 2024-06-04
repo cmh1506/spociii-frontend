@@ -1,0 +1,5 @@
+<div *ngFor="let verpackung of apiService.verpackungs$ | async">
+  <mat-card [routerLink]="['/verpackung/', verpackung['_id']]" style="cursor: pointer;">
+    <mat-card-content>{{verpackung["name"]}}</mat-card-content>
+  </mat-card>
+</div>

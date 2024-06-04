@@ -1,6 +1,6 @@
 export interface Material {  
   id: string
-  name: String
+  name: string
   bioCO2Verbrennung: Number
   bioFuelCO2: Number
   bioco2prod: Number

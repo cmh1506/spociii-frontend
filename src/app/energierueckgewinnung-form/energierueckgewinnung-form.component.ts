@@ -13,6 +13,9 @@ export class EnergierueckgewinnungFormComponent {
     private fb: FormBuilder,
     private router: Router
   ) { }
+
+  energierueckgewinnungs$ = this.apiService.energierueckgewinnungs$
+
   energierueckgewinnungForm = this.fb.nonNullable.group({
     name: '',
     recoveryRate: 0,
@@ -22,7 +25,7 @@ export class EnergierueckgewinnungFormComponent {
 
   saveEnergierueckgewinnung() {
     this.apiService.saveEnergierueckgewinnung(this.energierueckgewinnungForm.getRawValue()).subscribe({
-      next: () => this.router.navigate(['/users'])
+      //next: () => this.router.navigate(['/users'])
     })
   }
 
