@@ -31,7 +31,7 @@ import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equival
 import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
 import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { VerpackungListComponent } from './verpackung-list/verpackung-list.component';
 
 const routes = [

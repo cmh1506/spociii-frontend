@@ -8,7 +8,7 @@ import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
 import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
 import { MaterialverwendungEingabe } from "./models/materialverwendungEingabe";
-import { Verpackung } from "./models/Verpackung";
+import { Verpackung } from "./models/verpackung";
 
 @Injectable({
   providedIn: 'root'
