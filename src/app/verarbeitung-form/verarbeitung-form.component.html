@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Neue Verarbeitung anlegen:
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="verarbeitungForm"  (ngSubmit)="saveVerarbeitung()">
+      
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" name="name" placeholder="name" type="text">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>strom</mat-label>
+        <input matInput formControlName="strom" name="strom" type="number">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>waerme</mat-label>
+        <input matInput formControlName="waerme" name="waerme" type="number">
+      </mat-form-field>
+      
+      <br>
+      <br>
+      <br>
+
+      <div class="buttons">
+        <button mat-flat-button color="primary">Cancel</button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="verarbeitungForm.invalid">Speichern</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

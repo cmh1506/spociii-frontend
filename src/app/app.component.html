@@ -1,6 +1,31 @@
 <mat-toolbar>
-  <button mat-button routerLink="/">Spoc</button>
-  <button mat-button routerLink="/users">Users</button>   
+  <h1>Spoc</h1>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>list</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/verpackung">Verpackung</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/material">Material</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/energierueckgewinnung">Ernergierückgewinnung</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/nutzenergieCO2Equivalent">Nutzenergie</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/transportmittel">Transportmittel</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/verarbeitung">Verarbeitung</button>
+    </button>
+    <button mat-menu-item>
+      <button mat-menu-item routerLink="/users">Benutzer</button>
+    </button>
+  </mat-menu>
   <span style="flex: 1 1 auto;"></span>
   <button mat-button *ngIf="!authService.isAuthenticated" routerLink="/register">Register</button>
   <button mat-button *ngIf="!authService.isAuthenticated" routerLink="/login">Login</button>

@@ -7,7 +7,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
-  postMsg: any = "Fuck it."
+  postMsg: any = ""
 
   constructor(public apiService: ApiService) { }
 
