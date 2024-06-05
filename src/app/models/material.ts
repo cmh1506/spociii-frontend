@@ -1,20 +1,20 @@
 export interface Material {  
   id: string
   name: string
-  bioCO2Verbrennung: Number
-  bioFuelCO2: Number
-  bioco2prod: Number
-  co2Recycling: Number
-  co2Verbrennung: Number
-  dichte: Number
-  energieRecycling: Number
-  fossiles: Number
-  heizenergie: Number
-  productionCO2: Number
-  prozessenergie: Number
-  r_rate_herstellung: Number
+  bioCO2Verbrennung: number
+  bioFuelCO2: number
+  bioco2prod: number
+  co2Recycling: number
+  co2Verbrennung: number
+  dichte: number
+  energieRecycling: number
+  fossiles: number
+  heizenergie: number
+  productionCO2: number
+  prozessenergie: number
+  r_rate_herstellung: number
   recyclat_2te_mal: Boolean
   recyclierbar: Boolean
-  co2_deponie: Number
+  co2_deponie: number
   //recycling_modus: Recyclingverfahren
 }

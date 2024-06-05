@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './verpackung-form.component.html',
   styleUrls: ['./verpackung-form.component.css']
 })
-export class VerpackungFormComponent implements OnInit{
+export class VerpackungFormComponent implements OnInit {
   constructor(public apiService: ApiService,
     private fb: FormBuilder,
     private router: Router,
@@ -17,28 +17,32 @@ export class VerpackungFormComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log("In Oninit")
     const verpackung_id = this.route.snapshot.params['_id']
-    console.log(verpackung_id)
+    console.log("Verpackungsid: " + verpackung_id)
+    if (!verpackung_id) {
+      return
+    }
     this.apiService.getVerpackung(verpackung_id).subscribe((verpackung) => {
       if (!verpackung) return
       for (let i = 1; i < verpackung.materialverwendungs.length; i++) {
-        this.addMaterialVerwendung()    
+        this.addMaterialVerwendung(i)
       }
       this.verpackungForm.setValue(verpackung)
     })
-    
+
   }
 
   verpackungForm = this.fb.nonNullable.group({
     name: '',
     beschreibung: '',
-    materialverwendungs: this.fb.array([this.createMVFormGroup()]),
+    materialverwendungs: this.fb.array([this.createMVFormGroup(1)]),
   })
 
-  
-  createMVFormGroup() {
+
+  createMVFormGroup(schicht: number) {
+
     return this.fb.nonNullable.group({
+      layer: schicht,
       materialId: 0,
       verarbeitungId: 0,
       recyclingverfahrenId: 0,
@@ -63,9 +67,62 @@ export class VerpackungFormComponent implements OnInit{
     })
   }
 
-  addMaterialVerwendung() {
-    this.verpackungForm.controls.materialverwendungs.push(this.createMVFormGroup())  
+  addMaterialVerwendung(schicht: any) {
+    this.verpackungForm.controls.materialverwendungs.value.forEach(element => {
+      if(!element.layer) return
+      if(element.layer >= schicht){
+        element.layer = element.layer + 1
+      }
+    });
+    this.verpackungForm.controls.materialverwendungs.push(this.createMVFormGroup(schicht))
+    this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
+      if (a.layer && b.layer) return a.layer - b.layer
+      return 1; // sort in descending order
+    }))
   }
 
-  
+  deleteLayer(index: number){
+    this.verpackungForm.controls.materialverwendungs.removeAt(index)
+    this.verpackungForm.controls.materialverwendungs.value.forEach(element => {
+      if(!element.layer) return
+      if(element.layer > index){
+        element.layer = element.layer -1
+      }
+    })
+    this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
+      if (a.layer && b.layer) return a.layer - b.layer
+      return 1; // sort in descending order
+    }))
+  }
+
+  moveUp(index: number) { 
+    var layer = this.verpackungForm.controls.materialverwendungs.value[index].layer
+    if (layer) {
+      this.verpackungForm.controls.materialverwendungs.value[index].layer = layer - 1
+      this.verpackungForm.controls.materialverwendungs.value[index - 1].layer = layer
+    } 
+    
+    this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
+      if (a.layer && b.layer) return a.layer - b.layer
+      return 1; // sort in descending order
+    }))
+
+  }
+
+  moveDown(index: number) {
+    var layer = this.verpackungForm.controls.materialverwendungs.value[index].layer
+    if (layer) {
+      this.verpackungForm.controls.materialverwendungs.value[index].layer = layer + 1
+      this.verpackungForm.controls.materialverwendungs.value[index + 1].layer = layer
+    } 
+    
+    this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
+      if (a.layer && b.layer) return a.layer - b.layer
+      return 1; // sort in descending order
+    }))
+
+  }
+
+
+
 }

@@ -33,18 +33,69 @@ import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { VerpackungListComponent } from './verpackung-list/verpackung-list.component';
+import { HomeComponent } from './home/home.component';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'material', component: MaterialFormComponent },
-  { path: 'verpackung/:_id', component: VerpackungFormComponent },
-  { path: 'verpackung', component: VerpackungFormComponent },
-  { path: 'verpackungs', component: VerpackungListComponent },
-  { path: 'energierueckgewinnung', component: EnergierueckgewinnungFormComponent },
-  { path: 'nutzenergieCO2Equivalent', component: NutzenergieCO2EquivalentFormComponent },
-  { path: 'transportmittel', component: TransportmittelFormComponent },
-  { path: 'verarbeitung', component: VerarbeitungFormComponent },
+  {
+    path: 'material',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: MaterialFormComponent
+  },
+  {
+    path: 'verpackung/:_id',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: VerpackungFormComponent
+  },
+  {
+    path: 'verpackung',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: VerpackungFormComponent
+  },
+  {
+    path: 'verpackungs',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: VerpackungListComponent
+  },
+  {
+    path: 'energierueckgewinnung',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: EnergierueckgewinnungFormComponent
+  },
+  {
+    path: 'nutzenergieCO2Equivalent',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: NutzenergieCO2EquivalentFormComponent
+  },
+  {
+    path: 'transportmittel',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: TransportmittelFormComponent
+  },
+  {
+    path: 'verarbeitung',
+    canActivate: [() => {
+      return of(!!localStorage.getItem('token'))
+    }],
+    component: VerarbeitungFormComponent
+  },
   { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '**', redirectTo: 'home' },
   {
     path: 'users',
     component: UsersComponent,
@@ -72,7 +123,8 @@ const routes = [
     NutzenergieCO2EquivalentFormComponent,
     TransportmittelFormComponent,
     VerarbeitungFormComponent,
-    VerpackungListComponent
+    VerpackungListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

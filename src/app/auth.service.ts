@@ -33,13 +33,14 @@ export class AuthService {
   loginUser(loginData: { email: string; pwd: string; name: string; description: string; }) {
     this.httpClient.post<any>(this.path + '/login', loginData).subscribe((res: any) => {
       this.saveToken(res.token)
-      this.router.navigate(['/users']);
+      this.router.navigate(['/verpackungs']);
 
     })
   }
 
   logout() {
     localStorage.removeItem(this.TOKEN)
+    this.router.navigate(['/hone']);
   }
 
   saveToken(token: string) {

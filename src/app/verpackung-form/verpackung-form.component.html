@@ -29,6 +29,10 @@
           <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index" [formGroupName]="i" class="flex-column">
             <div class="flex-group">
               <mat-form-field class="mat-verw-form-input">
+                <mat-label>Schicht</mat-label>
+                <input formControlName="layer" matInput>
+              </mat-form-field>
+              <mat-form-field class="mat-verw-form-input">
                 <mat-label>Materialmenge [g]</mat-label>
                 <input formControlName="menge" matInput>
               </mat-form-field>              
@@ -36,10 +40,16 @@
                 <mat-label>Dicke [µm] / Flächengewicht</mat-label>
                 <input matInput formControlName="dicke">
               </mat-form-field>
-              <button mat-icon-button aria-label="Example icon-button with a menu">
+              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveUp(i)">
+                <mat-icon>north</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveDown(i)">
+                <mat-icon>south</mat-icon>
+              </button>
+              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="deleteLayer(i)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung()">
+              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung(i + 2)">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
