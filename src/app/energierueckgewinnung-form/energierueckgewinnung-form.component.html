@@ -1,0 +1,49 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>    
+        <form [formGroup]="energierueckgewinnungForm" (ngSubmit)="saveEnergierueckgewinnung()">
+
+          <br>
+          <mat-form-field class="register-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" name="name" placeholder="name" type="text">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="register-full-width">
+            <mat-label>RecoveryRate</mat-label>
+            <input matInput formControlName="recoveryRate" name="recoveryRate" type="number">
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field class="register-full-width">
+            <mat-label>Stromanteil</mat-label>
+            <input matInput formControlName="stromanteil" name="stromanteil" type="number">
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field class="register-full-width">
+            <mat-label>Thermischer Anteil</mat-label>
+            <input matInput formControlName="thermischerAnteil" name="thermischerAnteil" type="number">
+          </mat-form-field>
+          <br>
+          <br>
+          <br>
+
+          <div class="buttons">
+            <button mat-flat-button color="primary">Cancel</button>
+            <button type="submit" mat-flat-button color="primary"
+              [disabled]="energierueckgewinnungForm.invalid">Speichern</button>
+          </div>
+        </form>     
+  </mat-drawer>
+  <mat-drawer-content *ngIf="energierueckgewinnungs$ | async as energierueckgewinnungs">
+    <div *ngFor="let erni of energierueckgewinnungs">
+      <mat-card>
+        <mat-card-content >{{erni["name"]}}</mat-card-content>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+

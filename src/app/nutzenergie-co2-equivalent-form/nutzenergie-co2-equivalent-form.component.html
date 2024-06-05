@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Neue Nutzenergie CO2 Equivalent anlegen:
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="nutzenergieCO2EquivalentForm"  (ngSubmit)="saveNutzenergieCO2Equivalent()">
+      
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>energietraeger</mat-label>
+        <input matInput formControlName="energietraeger" name="energietraeger" type="text">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>co2ProKWh</mat-label>
+        <input matInput formControlName="co2ProKWh" name="co2ProKWh" type="number">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="register-full-width">
+        <mat-label>co2ProKJ</mat-label>
+        <input matInput formControlName="co2ProKJ" name="co2ProKJ" type="number">
+      </mat-form-field>
+      <br>
+      <br>
+      
+
+      <div class="buttons">
+        <button mat-flat-button color="primary">Cancel</button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="nutzenergieCO2EquivalentForm.invalid">Speichern</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
