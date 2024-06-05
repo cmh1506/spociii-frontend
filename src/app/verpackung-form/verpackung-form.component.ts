@@ -96,6 +96,7 @@ export class VerpackungFormComponent implements OnInit {
   }
 
   moveUp(index: number) { 
+    if (index = 0) return
     var layer = this.verpackungForm.controls.materialverwendungs.value[index].layer
     if (layer) {
       this.verpackungForm.controls.materialverwendungs.value[index].layer = layer - 1
@@ -110,6 +111,7 @@ export class VerpackungFormComponent implements OnInit {
   }
 
   moveDown(index: number) {
+    if (index = this.verpackungForm.controls.materialverwendungs.value.length - 1) return
     var layer = this.verpackungForm.controls.materialverwendungs.value[index].layer
     if (layer) {
       this.verpackungForm.controls.materialverwendungs.value[index].layer = layer + 1
