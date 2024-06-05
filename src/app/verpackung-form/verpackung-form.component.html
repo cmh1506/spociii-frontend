@@ -32,19 +32,6 @@
                 <mat-label>Schicht</mat-label>
                 <input formControlName="layer" matInput>
               </mat-form-field>
-
-              <mat-form-field>
-                <mat-label>Material</mat-label>
-                <mat-select formControlName="materialId" name="materialId">
-                  <option value="" selected></option>
-                 <div *ngFor="let m of apiService.energierueckgewinnungs$ | async">
-                  <mat-option [value]="m.id">{{m.name}}</mat-option>
-                 </div>
-                </mat-select>
-              </mat-form-field>
-
-
-
               <mat-form-field class="mat-verw-form-input">
                 <mat-label>Materialmenge [g]</mat-label>
                 <input formControlName="menge" matInput>
