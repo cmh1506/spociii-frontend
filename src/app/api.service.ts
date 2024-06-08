@@ -48,7 +48,7 @@ export class ApiService {
   }
 
   saveMaterial(material: Partial<Material>): Observable<Material> {
-    if (!material.id || material.id === '') {
+    if (!material._id || material._id === '') {
       let newMaterial: Partial<Material> = { ...material };
       console.log(newMaterial)
       return this.httpClient.post<Material>(this.path + '/material', newMaterial)
@@ -73,6 +73,8 @@ export class ApiService {
   );
 
   verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+
+  materials$ = this.httpClient.get<Material[]>(this.path + '/materials')
 
   getVerpackung(_id: string) {
     return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)

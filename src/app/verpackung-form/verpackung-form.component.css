@@ -1,0 +1,11 @@
+.mat-verw-form-input {
+  min-width: 240px;
+  flex-grow: 1;
+  padding: 4px;
+}
+
+.mat-verw-form-button {
+  min-width: 120px;
+  flex-grow: 1;
+  padding: 4px;
+}

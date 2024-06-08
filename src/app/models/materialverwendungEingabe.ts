@@ -8,7 +8,6 @@ export interface MaterialverwendungEingabe {
   energierueckgewinnungId: number,
   transportmittelId: number,
   energierueckgewinnung: string,
-  material: string,
   verarbeitung: string,
   recyclingverfahren: string,
   transportmittel: string,
