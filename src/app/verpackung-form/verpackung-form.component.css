@@ -1,5 +1,12 @@
 .mat-verw-form-input {
-  min-width: 240px;
+  max-width: 7vw;
+  flex-grow: 1;
+  padding: 4px;
+}
+
+
+.mat-verw-form-bescheibung {
+  width: 50%;
   flex-grow: 1;
   padding: 4px;
 }

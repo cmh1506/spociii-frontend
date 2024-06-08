@@ -1,72 +1,199 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Neue Verpackung anlegen:
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="verpackungForm">
-      <section>
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{verpackungForm.controls.name.value}}
+    </mat-panel-title>
+
+  </mat-expansion-panel-header>
+  <form [formGroup]="verpackungForm">
+    <section>
       <br>
-      <mat-form-field class="mat-verw-form-input" >
+      <mat-form-field class="mat-verw-form-input">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" name="name" placeholder="name" type="text">
       </mat-form-field>
-      <mat-form-field class="mat-verw-textarea">
+      <mat-form-field class="mat-verw-form-bescheibung">
         <mat-label>Beschreibung</mat-label>
-        <input matInput formControlName="beschreibung" name="beschreibung" >
+        <input matInput formControlName="beschreibung" name="beschreibung">
       </mat-form-field>
       <br>
     </section>
+    <section>
+      <h3>Schichten</h3>
+      <div formArrayName="materialverwendungs">
+        <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index" [formGroupName]="i"
+          class="flex-column">
+          <div class="flex-group">
+            <!-- <mat-form-field class="mat-verw-form-input">
+                  <mat-label>Schicht</mat-label>
+                  <input formControlName="layer" matInput class="fuck">
+                </mat-form-field> -->
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Material</mat-label>
+              <mat-select formControlName="materialId">
+                <mat-option *ngFor="let material of apiService.materials$ | async;" value="{{material._id}}">
+                  {{material.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Materialmenge [g]</mat-label>
+              <input formControlName="menge" matInput>
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Fläche [cm2]</mat-label>
+              <input matInput formControlName="flaeche">
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Dicke [µm] / Flächengewicht</mat-label>
+              <input matInput formControlName="dicke">
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Verarbeitung</mat-label>
+              <mat-select formControlName="verarbeitungId">
+                <mat-option *ngFor="let verarbeitung of apiService.verarbeitungs$ | async;" value="{{verarbeitung._id}}">
+                  {{verarbeitung.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Recyclingquote [%]</mat-label>
+              <input matInput formControlName="recyclingQuote">
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Entsorgung</mat-label>
+              <mat-select formControlName="energierueckgewinnungId">
+                <mat-option *ngFor="let energierueckgewinnung of apiService.energierueckgewinnungs$ | async;" value="{{energierueckgewinnung._id}}">
+                  {{energierueckgewinnung.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="mat-verw-form-input">
+              <mat-label>Transport [km]</mat-label>
+              <input matInput formControlName="transportstrecke">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="mat-verw-form-input">
+              <mat-label>Transportmittel</mat-label>
+              <mat-select formControlName="transportmittelId">
+                <mat-option *ngFor="let transportmittel of apiService.transportmittels$| async" value="{{transportmittel._id}}">
+                  {{transportmittel.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-      
-      <section>
-        <nav>Schichten</nav>
-        <div formArrayName="materialverwendungs">
-          <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index" [formGroupName]="i" class="flex-column">
-            <div class="flex-group">
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Schicht</mat-label>
-                <input formControlName="layer" matInput>
-              </mat-form-field>
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Material</mat-label>
-                <mat-select formControlName="materialId">
-                  <mat-option *ngFor="let material of apiService.materials$ | async;" value="{{material._id}}">
-                    {{material.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Materialmenge [g]</mat-label>
-                <input formControlName="menge" matInput>
-              </mat-form-field>              
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Dicke [µm] / Flächengewicht</mat-label>
-                <input matInput formControlName="dicke">
-              </mat-form-field>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveUp(i)">
-                <mat-icon>north</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveDown(i)">
-                <mat-icon>south</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="deleteLayer(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung(i + 2)">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
+            <!-- <mat-form-field class="mat-verw-form-input">
+              <mat-label>XXX</mat-label>
+              <input matInput formControlName="XXX">
+            </mat-form-field> -->
+
+
+
+            <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveUp(i)">
+              <mat-icon>north</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveDown(i)">
+              <mat-icon>south</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Example icon-button with a menu" (click)="deleteLayer(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung(i + 2)">
+              <mat-icon>add</mat-icon>
+            </button>
           </div>
         </div>
-      </section>
-      <section>
-        <div class="buttons">
-          <button mat-flat-button color="primary" class="mat-verw-form-button" style="margin-right:20px">Cancel</button>
-          <button type="submit" mat-flat-button color="primary" [disabled]="verpackungForm.invalid" (click)="saveVerpackung()">Speichern</button>
-        </div>
-      </section>
-    </form>
-  </mat-card-content>
-</mat-card>
+      </div>
+    </section>
+    <section>
+      <div class="buttons">
+        <button mat-flat-button color="primary" class="mat-verw-form-button" style="margin-right:20px">Cancel</button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="verpackungForm.invalid"
+          (click)="saveVerpackung()">Speichern</button>
+      </div>
+    </section>
+  </form>
+</mat-expansion-panel>
+
+
+
+
+
+
+
+<mat-tab-group>
+  <mat-tab label="Berechnung Detail" class="mat-tabs">
+    <div class="wrapper">
+      <table mat-table class="mat-elevation-z8">
+        <ng-container matColumnDef="material">
+          <th *matHeaderCellDef mat-header-cell>Material</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.material}} </td>
+        </ng-container>
+        <ng-container matColumnDef="materialCO2Eq">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.materialCO2Eq}} </td>
+        </ng-container>
+        <ng-container matColumnDef="materialEnergie">
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.materialEnergie}} </td>
+        </ng-container>
+        <ng-container matColumnDef="energieAufwandVerarbeitung">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.energieAufwandVerarbeitung}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="verbrennungCo2Eq">
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.verbrennungCo2Eq}} </td>
+        </ng-container>
+        <ng-container matColumnDef="verbrennungENutzEnergie">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.verbrennungENutzEnergie}} </td>
+        </ng-container>
+        <ng-container matColumnDef="gutschriftVerbrennungCo2Eq">
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.gutschriftVerbrennungCo2Eq}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="transportCo2Eq">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.transportCo2Eq}} </td>
+        </ng-container>
+        <ng-container matColumnDef="transportEnergie">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.transportEnergie}} </td>
+        </ng-container>
+        <ng-container matColumnDef="indirectco2Biofuel">
+          <th *matHeaderCellDef mat-header-cell>Bio CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.indirectco2Biofuel}} </td>
+        </ng-container>
+        <ng-container matColumnDef="co2AufwandVerarbeitung">
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.co2AufwandVerarbeitung}} </td>
+        </ng-container>
+        <ng-container matColumnDef="verbrennungBioCo2Eq">
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.verbrennungBioCo2Eq}} </td>
+        </ng-container>
+        <ng-container matColumnDef="herstellungBioCo2Eq">
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <td *matCellDef="let materialverwendung" mat-cell> {{materialverwendung.herstellungBioCo2Eq}} </td>
+        </ng-container>
+        <ng-container matColumnDef="header-row-second-group">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="6"> Second group </th>
+        </ng-container>
+        <ng-container matColumnDef="header-row-first-group">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="7">
+            First group
+          </th>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['header-row-first-group', 'header-row-second-group']"></tr>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Berechnung Gesamt" class="mat-tabs">
+    <h1>Hihi</h1>
+  </mat-tab>
+</mat-tab-group>

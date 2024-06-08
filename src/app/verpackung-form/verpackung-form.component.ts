@@ -15,6 +15,11 @@ export class VerpackungFormComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
+  displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
+                                'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
+                                'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
+                                'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
+
 
   ngOnInit(): void {
     const verpackung_id = this.route.snapshot.params['_id']
@@ -44,14 +49,10 @@ export class VerpackungFormComponent implements OnInit {
     return this.fb.nonNullable.group({
       layer: schicht,
       materialId:  [''],
-      verarbeitungId: 0,
-      recyclingverfahrenId: 0,
-      energierueckgewinnungId: 0,
       transportmittelId: 0,
-      energierueckgewinnung:  [''],
-      verarbeitung:  [''],
-      recyclingverfahren:  [''],
-      transportmittel:  [''],
+      energierueckgewinnungId:  [''],
+      verarbeitungId:  [''],
+      recyclingverfahrenId:  [''],
       menge: 0,
       flaeche: 0,
       dicke: 0,

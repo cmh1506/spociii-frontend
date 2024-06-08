@@ -7,7 +7,6 @@ import { Energierueckgewinnung } from "./models/energierueckgewinnung";
 import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
 import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
-import { MaterialverwendungEingabe } from "./models/materialverwendungEingabe";
 import { Verpackung } from "./models/verpackung";
 
 @Injectable({
@@ -59,7 +58,7 @@ export class ApiService {
   }
 
   saveEnergierueckgewinnung(energierueckgewinnung: Partial<Energierueckgewinnung>): Observable<Energierueckgewinnung> {
-    if (!energierueckgewinnung.id || energierueckgewinnung.id === '') {
+    if (!energierueckgewinnung._id || energierueckgewinnung._id === '') {
       let newEnergierueckgewinnung: Partial<Energierueckgewinnung> = { ...energierueckgewinnung };
       return this.httpClient.post<Energierueckgewinnung>(this.path + '/energierueckgewinnung', newEnergierueckgewinnung)
     }
@@ -76,13 +75,23 @@ export class ApiService {
 
   materials$ = this.httpClient.get<Material[]>(this.path + '/materials')
 
+  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
+
+  nutzenergieCO2Equivalents$ = this.httpClient.get<NutzenergieCO2Equivalent[]>(this.path + '/nutzenergieCO2Equivalents')
+
+  transportmittels$ = this.httpClient.get<Transportmittel[]>(this.path + '/transportmittels')
+
+  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitungs')
+  
+
+
   getVerpackung(_id: string) {
     return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)
   }
   
 
   saveNutzenergieCO2Equivalent(nutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent>): Observable<NutzenergieCO2Equivalent> {
-    if (!nutzenergieCO2Equivalent.id || nutzenergieCO2Equivalent.id === '') {
+    if (!nutzenergieCO2Equivalent._id || nutzenergieCO2Equivalent._id === '') {
       let newNutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent> = { ...nutzenergieCO2Equivalent };
       return this.httpClient.post<NutzenergieCO2Equivalent>(this.path + '/nutzenergieCO2Equivalent', newNutzenergieCO2Equivalent)
     }
@@ -91,7 +100,7 @@ export class ApiService {
   }
 
   saveTransportmittel(transportmittel: Partial<Transportmittel>): Observable<Transportmittel> {
-    if (!transportmittel.id || transportmittel.id === '') {
+    if (!transportmittel._id || transportmittel._id === '') {
       let newTransportmittel: Partial<Transportmittel> = { ...transportmittel };
       return this.httpClient.post<Transportmittel>(this.path + '/transportmittel', newTransportmittel)
     }
@@ -100,7 +109,7 @@ export class ApiService {
   }
 
   saveVerarbeitung(verarbeitung: Partial<Verarbeitung>): Observable<Verarbeitung> {
-    if (!verarbeitung.id || verarbeitung.id === '') {
+    if (!verarbeitung._id || verarbeitung._id === '') {
       let newVerarbeitung: Partial<Verarbeitung> = { ...verarbeitung };
       return this.httpClient.post<Verarbeitung>(this.path + '/verarbeitung', newVerarbeitung)
     }
@@ -118,13 +127,6 @@ export class ApiService {
       return this.httpClient.put<Verpackung>(this.path + '/verpackung', verpackung)
   }
 
-  saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
-    if (!materialverwendungEingabe.id || materialverwendungEingabe.id === '') {
-      let newMaterialverwendungEingabe: Partial<MaterialverwendungEingabe> = { ...materialverwendungEingabe };
-      return this.httpClient.post<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', newMaterialverwendungEingabe)
-    }
-    else
-      return this.httpClient.put<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', materialverwendungEingabe)
-  }
+  
 
 }
