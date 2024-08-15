@@ -15,6 +15,8 @@ export class VerpackungFormComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
+  energieCO2MVs$ = this.apiService.getEnergieCO2MVs
+
   displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
                                 'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
                                 'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',

@@ -7,10 +7,6 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  //path = "https://spociii-backend.azurewebsites.net/auth"
-  path = environment.path + "/auth"
-  //path = "localhost:3000/auth"
-
   TOKEN: string = 'token'
 
   constructor(private httpClient: HttpClient,
@@ -26,12 +22,12 @@ export class AuthService {
   }
 
   registerUser(userRegistrationData: any) {
-    this.httpClient.post(this.path + '/register', userRegistrationData).subscribe((res: any) => {
+    this.httpClient.post(environment.baseURL + '/register', userRegistrationData).subscribe((res: any) => {
       this.saveToken(res.token)
     })
   }
   loginUser(loginData: { email: string; pwd: string; name: string; description: string; }) {
-    this.httpClient.post<any>(this.path + '/login', loginData).subscribe((res: any) => {
+    this.httpClient.post<any>(environment.baseURL + '/login', loginData).subscribe((res: any) => {
       this.saveToken(res.token)
       this.router.navigate(['/verpackungs']);
 

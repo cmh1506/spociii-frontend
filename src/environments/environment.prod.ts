@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  path: "https://spociii-backend.azurewebsites.net/"
+  baseURL: "http://212.132.127.88:3000" 
 }
