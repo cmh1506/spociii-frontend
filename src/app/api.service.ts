@@ -7,7 +7,6 @@ import { Energierueckgewinnung } from "./models/energierueckgewinnung";
 import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
 import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
-import { MaterialverwendungEingabe } from "./models/materialverwendungEingabe";
 import { Verpackung } from "./models/verpackung";
 
 @Injectable({
@@ -19,17 +18,17 @@ export class ApiService {
   users = []
   constructor(private httpClient: HttpClient) { }
 
-  verpackungs$ = this.httpClient.get<Verpackung[]>('/verpackungs')
+  verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
 
-  materials$ = this.httpClient.get<Material[]>('/materials')
+  materials$ = this.httpClient.get<Material[]>(this.path + '/materialRefs')
 
-  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>('/energierueckgewinnungs')
+  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
 
-  nutzenergieCO2Equivalents$ = this.httpClient.get<NutzenergieCO2Equivalent[]>('/nutzenergieCO2Equivalents')
+  nutzenergieCO2Equivalents$ = this.httpClient.get<NutzenergieCO2Equivalent[]>(this.path + '/nutzenergieCO2Equivalents')
 
-  transportmittels$ = this.httpClient.get<Transportmittel[]>('/transportmittels')
+  transportmittels$ = this.httpClient.get<Transportmittel[]>(this.path + '/transportmittels')
 
-  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>('/verarbeitungs')
+  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitungs')
 
 
 

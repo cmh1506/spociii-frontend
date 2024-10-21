@@ -1,9 +1,9 @@
-import { MaterialverwendungEingabe } from "./materialverwendungEingabe";
+import { Materialverwendung } from "./materialverwendung";
 
 export interface Verpackung {  
   _id: string,
   name: string,
   beschreibung: string,
-  materialverwendungs: MaterialverwendungEingabe[]
+  materialverwendungs: Materialverwendung[]
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Materialverwendung } from '../models/materialverwendung';
 
 @Component({
   selector: 'app-verpackung-form',
@@ -16,6 +17,7 @@ export class VerpackungFormComponent implements OnInit {
   ) { }
 
   //energieCO2MVs$ = this.apiService.getEnergieCO2MVs
+  materialverwendungs: Materialverwendung[] = []
 
   displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
                                 'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
@@ -35,6 +37,8 @@ export class VerpackungFormComponent implements OnInit {
         this.addMaterialVerwendung(i)
       }
       this.verpackungForm.setValue(verpackung)
+      this.materialverwendungs = verpackung.materialverwendungs
+      console.log("This is it " + this.materialverwendungs[0].materialCO2Eq)
     })
 
   }
