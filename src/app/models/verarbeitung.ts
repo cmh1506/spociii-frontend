@@ -1,5 +1,5 @@
 export interface Verarbeitung {
-  id: string,
+  _id: string,
   name: string,
   strom: number,
   waerme: number  

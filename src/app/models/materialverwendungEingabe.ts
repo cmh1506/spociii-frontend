@@ -1,5 +1,5 @@
 export interface MaterialverwendungEingabe {
-  id: string,
+  _id: string,
   verpackungId: number,
   layer: number,
   materialId: number,

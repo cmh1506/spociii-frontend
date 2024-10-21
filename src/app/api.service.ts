@@ -18,6 +18,22 @@ export class ApiService {
   messages = []
   users = []
   constructor(private httpClient: HttpClient) { }
+
+  verpackungs$ = this.httpClient.get<Verpackung[]>('/verpackungs')
+
+  materials$ = this.httpClient.get<Material[]>('/materials')
+
+  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>('/energierueckgewinnungs')
+
+  nutzenergieCO2Equivalents$ = this.httpClient.get<NutzenergieCO2Equivalent[]>('/nutzenergieCO2Equivalents')
+
+  transportmittels$ = this.httpClient.get<Transportmittel[]>('/transportmittels')
+
+  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>('/verarbeitungs')
+
+
+
+
   getMessages(userId: string) {
     this.httpClient.get(this.path + '/posts/' + userId).subscribe((res: any) => {
       this.messages = res
@@ -48,7 +64,7 @@ export class ApiService {
   }
 
   saveMaterial(material: Partial<Material>): Observable<Material> {
-    if (!material.id || material.id === '') {
+    if (!material._id || material._id === '') {
       let newMaterial: Partial<Material> = { ...material };
       console.log(newMaterial)
       return this.httpClient.post<Material>(this.path + '/material', newMaterial)
@@ -59,7 +75,7 @@ export class ApiService {
   }
 
   saveEnergierueckgewinnung(energierueckgewinnung: Partial<Energierueckgewinnung>): Observable<Energierueckgewinnung> {
-    if (!energierueckgewinnung.id || energierueckgewinnung.id === '') {
+    if (!energierueckgewinnung._id || energierueckgewinnung._id === '') {
       let newEnergierueckgewinnung: Partial<Energierueckgewinnung> = { ...energierueckgewinnung };
       return this.httpClient.post<Energierueckgewinnung>(this.path + '/energierueckgewinnung', newEnergierueckgewinnung)
     }
@@ -72,7 +88,6 @@ export class ApiService {
     tap(data => console.log('Energierueckgewinnungs: ', JSON.stringify(data)))
   );
 
-  verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
 
   getVerpackung(_id: string) {
     return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)
@@ -80,7 +95,7 @@ export class ApiService {
   
 
   saveNutzenergieCO2Equivalent(nutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent>): Observable<NutzenergieCO2Equivalent> {
-    if (!nutzenergieCO2Equivalent.id || nutzenergieCO2Equivalent.id === '') {
+    if (!nutzenergieCO2Equivalent._id || nutzenergieCO2Equivalent._id === '') {
       let newNutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent> = { ...nutzenergieCO2Equivalent };
       return this.httpClient.post<NutzenergieCO2Equivalent>(this.path + '/nutzenergieCO2Equivalent', newNutzenergieCO2Equivalent)
     }
@@ -89,7 +104,7 @@ export class ApiService {
   }
 
   saveTransportmittel(transportmittel: Partial<Transportmittel>): Observable<Transportmittel> {
-    if (!transportmittel.id || transportmittel.id === '') {
+    if (!transportmittel._id || transportmittel._id === '') {
       let newTransportmittel: Partial<Transportmittel> = { ...transportmittel };
       return this.httpClient.post<Transportmittel>(this.path + '/transportmittel', newTransportmittel)
     }
@@ -98,7 +113,7 @@ export class ApiService {
   }
 
   saveVerarbeitung(verarbeitung: Partial<Verarbeitung>): Observable<Verarbeitung> {
-    if (!verarbeitung.id || verarbeitung.id === '') {
+    if (!verarbeitung._id || verarbeitung._id === '') {
       let newVerarbeitung: Partial<Verarbeitung> = { ...verarbeitung };
       return this.httpClient.post<Verarbeitung>(this.path + '/verarbeitung', newVerarbeitung)
     }
@@ -117,7 +132,7 @@ export class ApiService {
   }
 
   saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
-    if (!materialverwendungEingabe.id || materialverwendungEingabe.id === '') {
+    if (!materialverwendungEingabe._id || materialverwendungEingabe._id === '') {
       let newMaterialverwendungEingabe: Partial<MaterialverwendungEingabe> = { ...materialverwendungEingabe };
       return this.httpClient.post<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', newMaterialverwendungEingabe)
     }

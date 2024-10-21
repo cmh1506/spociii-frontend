@@ -34,6 +34,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { VerpackungListComponent } from './verpackung-list/verpackung-list.component';
 import { HomeComponent } from './home/home.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -143,7 +146,10 @@ const routes = [
     ReactiveFormsModule,
     MatMenuModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatTableModule,
+    MatExpansionModule
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

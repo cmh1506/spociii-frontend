@@ -1,5 +1,5 @@
 export interface Energierueckgewinnung {
-  id: string
+  _id: string
   name: string,
   recoveryRate: number,
   stromanteil: number,

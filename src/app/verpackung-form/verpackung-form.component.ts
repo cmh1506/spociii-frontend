@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,13 @@ export class VerpackungFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+
+  //energieCO2MVs$ = this.apiService.getEnergieCO2MVs
+
+  displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
+                                'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
+                                'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
+                                'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
 
 
   ngOnInit(): void {
@@ -43,16 +50,11 @@ export class VerpackungFormComponent implements OnInit {
 
     return this.fb.nonNullable.group({
       layer: schicht,
-      materialId: 0,
-      verarbeitungId: 0,
-      recyclingverfahrenId: 0,
-      energierueckgewinnungId: 0,
+      materialId:  [''],
       transportmittelId: 0,
-      energierueckgewinnung: '',
-      material: '',
-      verarbeitung: '',
-      recyclingverfahren: '',
-      transportmittel: '',
+      energierueckgewinnungId:  [''],
+      verarbeitungId:  [''],
+      recyclingverfahrenId:  [''],
       menge: 0,
       flaeche: 0,
       dicke: 0,

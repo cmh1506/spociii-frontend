@@ -1,5 +1,5 @@
 export interface Transportmittel {
-  id: string
+  _id: string
   name: string,
   stromanteil: number,
   energie: number,
