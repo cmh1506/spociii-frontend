@@ -131,13 +131,13 @@ export class ApiService {
       return this.httpClient.put<Verpackung>(this.path + '/verpackung', verpackung)
   }
 
-  saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
+  /* saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
     if (!materialverwendungEingabe._id || materialverwendungEingabe._id === '') {
       let newMaterialverwendungEingabe: Partial<MaterialverwendungEingabe> = { ...materialverwendungEingabe };
       return this.httpClient.post<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', newMaterialverwendungEingabe)
     }
     else
       return this.httpClient.put<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', materialverwendungEingabe)
-  }
+  } */
 
 }

@@ -51,10 +51,10 @@ export class VerpackungFormComponent implements OnInit {
     return this.fb.nonNullable.group({
       layer: schicht,
       materialId:  [''],
-      transportmittelId: 0,
-      energierueckgewinnungId:  [''],
       verarbeitungId:  [''],
       recyclingverfahrenId:  [''],
+      energierueckgewinnungId:  [''],
+      transportmittelId: [''],      
       menge: 0,
       flaeche: 0,
       dicke: 0,

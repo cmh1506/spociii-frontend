@@ -1,64 +1,3 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      Neue Verpackung anlegen:
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="verpackungForm">
-      
-      <br>
-      <mat-form-field class="register-full-width">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" name="name" placeholder="name" type="text">
-      </mat-form-field>
-      <mat-form-field class="register-full-width">
-        <mat-label>Beschreibung</mat-label>
-        <textarea matInput formControlName="beschreibung" name="beschreibung"></textarea>
-      </mat-form-field>
-      <br>
-      <br>
-
-      <div class="buttons">
-        <button mat-flat-button color="primary">Cancel</button>
-        <button type="submit" mat-flat-button color="primary" [disabled]="verpackungForm.invalid" (click)="saveVerpackung()">Speichern</button>
-      </div>
-      <section>
-        <nav>Schichten</nav>
-        <div formArrayName="materialverwendungs">
-          <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index" [formGroupName]="i" class="flex-column">
-            <div class="flex-group">
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Schicht</mat-label>
-                <input formControlName="layer" matInput>
-              </mat-form-field>
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Materialmenge [g]</mat-label>
-                <input formControlName="menge" matInput>
-              </mat-form-field>              
-              <mat-form-field class="mat-verw-form-input">
-                <mat-label>Dicke [µm] / Flächengewicht</mat-label>
-                <input matInput formControlName="dicke">
-              </mat-form-field>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveUp(i)">
-                <mat-icon>north</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="moveDown(i)">
-                <mat-icon>south</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="deleteLayer(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button mat-icon-button aria-label="Example icon-button with a menu" (click)="addMaterialVerwendung(i + 2)">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </form>
-  </mat-card-content>
-</mat-card>
 <mat-expansion-panel hideToggle>
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -183,7 +122,7 @@
 
 <mat-tab-group>
   <mat-tab label="Berechnung Detail" class="mat-tabs">
-    <div class="wrapper">
+    <div class="wrapper background-color">
       <table mat-table class="mat-elevation-z8">
         <ng-container matColumnDef="material">
           <th *matHeaderCellDef mat-header-cell>Material</th>
@@ -254,7 +193,9 @@
     </div>
 
   </mat-tab>
-  <mat-tab label="Berechnung Gesamt" class="mat-tabs">
+  <div class="berechnung-detail">
+  <mat-tab label="Berechnung Gesamt" class="mat-tabs berechnung-detail" >
     <h1>Hihi</h1>
   </mat-tab>
+</div>
 </mat-tab-group>
