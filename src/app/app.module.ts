@@ -38,6 +38,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -151,7 +152,8 @@ const routes = [
     MatTabsModule,
     MatSelectModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

@@ -5,5 +5,4 @@ export interface Verpackung {
   name: string,
   beschreibung: string,
   materialverwendungs: Materialverwendung[]
-
 }

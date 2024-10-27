@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Materialverwendung } from '../models/materialverwendung';
+import { Observable } from 'rxjs';
+import { Berechnung } from '../models/berechnung';
 
 @Component({
   selector: 'app-verpackung-form',
@@ -17,12 +18,13 @@ export class VerpackungFormComponent implements OnInit {
   ) { }
 
   //energieCO2MVs$ = this.apiService.getEnergieCO2MVs
-  materialverwendungs: Materialverwendung[] = []
 
   displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
-                                'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
-                                'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
-                                'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
+    'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
+    'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
+    'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
+
+  berechnungs$!: Observable<Berechnung[]>
 
 
   ngOnInit(): void {
@@ -37,16 +39,17 @@ export class VerpackungFormComponent implements OnInit {
         this.addMaterialVerwendung(i)
       }
       this.verpackungForm.setValue(verpackung)
-      this.materialverwendungs = verpackung.materialverwendungs
-      console.log("This is it " + this.materialverwendungs[0].materialCO2Eq)
     })
+    this.berechnungs$ = this.apiService.getBerechnungs(verpackung_id)
+
 
   }
 
   verpackungForm = this.fb.nonNullable.group({
+    _id: '',
     name: '',
     beschreibung: '',
-    materialverwendungs: this.fb.array([this.createMVFormGroup(1)]),
+    materialverwendungs: this.fb.array([this.createMVFormGroup(1)])
   })
 
 
@@ -54,16 +57,17 @@ export class VerpackungFormComponent implements OnInit {
 
     return this.fb.nonNullable.group({
       layer: schicht,
-      materialId:  [''],
-      verarbeitungId:  [''],
-      recyclingverfahrenId:  [''],
-      energierueckgewinnungId:  [''],
-      transportmittelId: [''],      
+      materialId: [''],
+      verarbeitungId: [''],
+      recyclingverfahrenId: [''],
+      energierueckgewinnungId: [''],
+      transportmittelId: [''],
       menge: 0,
       flaeche: 0,
       dicke: 0,
       recyclingQuote: 0,
       transportstrecke: 0,
+      openLoop: false
     })
   }
 
@@ -75,8 +79,8 @@ export class VerpackungFormComponent implements OnInit {
 
   addMaterialVerwendung(schicht: any) {
     this.verpackungForm.controls.materialverwendungs.value.forEach(element => {
-      if(!element.layer) return
-      if(element.layer >= schicht){
+      if (!element.layer) return
+      if (element.layer >= schicht) {
         element.layer = element.layer + 1
       }
     });
@@ -87,12 +91,12 @@ export class VerpackungFormComponent implements OnInit {
     }))
   }
 
-  deleteLayer(index: number){
+  deleteLayer(index: number) {
     this.verpackungForm.controls.materialverwendungs.removeAt(index)
     this.verpackungForm.controls.materialverwendungs.value.forEach(element => {
-      if(!element.layer) return
-      if(element.layer > index){
-        element.layer = element.layer -1
+      if (!element.layer) return
+      if (element.layer > index) {
+        element.layer = element.layer - 1
       }
     })
     this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
@@ -101,14 +105,14 @@ export class VerpackungFormComponent implements OnInit {
     }))
   }
 
-  moveUp(index: number) { 
+  moveUp(index: number) {
     if (index == 0) return
     var layer = this.verpackungForm.controls.materialverwendungs.value[index].layer
     if (layer) {
       this.verpackungForm.controls.materialverwendungs.value[index].layer = layer - 1
       this.verpackungForm.controls.materialverwendungs.value[index - 1].layer = layer
-    } 
-    
+    }
+
     this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
       if (a.layer && b.layer) return a.layer - b.layer
       return 1; // sort in descending order
@@ -122,8 +126,8 @@ export class VerpackungFormComponent implements OnInit {
     if (layer) {
       this.verpackungForm.controls.materialverwendungs.value[index].layer = layer + 1
       this.verpackungForm.controls.materialverwendungs.value[index + 1].layer = layer
-    } 
-    
+    }
+
     this.verpackungForm.controls.materialverwendungs.patchValue(this.verpackungForm.controls.materialverwendungs.value.sort(function (a, b) {
       if (a.layer && b.layer) return a.layer - b.layer
       return 1; // sort in descending order

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { EMPTY, Observable, of, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Material } from "./models/material";
 import { Energierueckgewinnung } from "./models/energierueckgewinnung";
@@ -8,6 +8,8 @@ import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
 import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
 import { Verpackung } from "./models/verpackung";
+import { Berechnung } from "./models/berechnung";
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,9 @@ export class ApiService {
   path = environment.path
   messages = []
   users = []
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private route: ActivatedRoute,
+  ) { }
 
   verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
 
@@ -29,8 +33,6 @@ export class ApiService {
   transportmittels$ = this.httpClient.get<Transportmittel[]>(this.path + '/transportmittels')
 
   verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitungs')
-
-
 
 
   getMessages(userId: string) {
@@ -91,6 +93,15 @@ export class ApiService {
   getVerpackung(_id: string) {
     return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)
   }
+
+  getBerechnungs(_id: string) {
+    if (_id || _id !== '') {
+      return this.httpClient.get<Berechnung[]>(this.path + '/berechnungs/' + _id)
+    } else {
+      return EMPTY
+    }
+    
+  }
   
 
   saveNutzenergieCO2Equivalent(nutzenergieCO2Equivalent: Partial<NutzenergieCO2Equivalent>): Observable<NutzenergieCO2Equivalent> {
@@ -127,16 +138,9 @@ export class ApiService {
       return this.httpClient.post<Verpackung>(this.path + '/verpackung', newVerpackung)
     }
     else
-      return this.httpClient.put<Verpackung>(this.path + '/verpackung', verpackung)
+      return this.httpClient.put<Verpackung>(this.path + '/verpackung/' + verpackung._id, verpackung)
   }
 
-  /* saveMaterialverwendungEingabe(materialverwendungEingabe: Partial<MaterialverwendungEingabe>): Observable<MaterialverwendungEingabe> {
-    if (!materialverwendungEingabe._id || materialverwendungEingabe._id === '') {
-      let newMaterialverwendungEingabe: Partial<MaterialverwendungEingabe> = { ...materialverwendungEingabe };
-      return this.httpClient.post<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', newMaterialverwendungEingabe)
-    }
-    else
-      return this.httpClient.put<MaterialverwendungEingabe>(this.path + '/materialverwendungEingabe', materialverwendungEingabe)
-  } */
+  
 
 }
