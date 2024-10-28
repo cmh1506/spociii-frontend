@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -39,6 +38,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -153,7 +154,8 @@ const routes = [
     MatSelectModule,
     MatTableModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    StoreModule.forRoot({})
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

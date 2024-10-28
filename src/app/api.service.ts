@@ -9,7 +9,7 @@ import { Transportmittel } from "./models/transportmittel";
 import { Verarbeitung } from "./models/verarbeitung";
 import { Verpackung } from "./models/verpackung";
 import { Berechnung } from "./models/berechnung";
-import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,10 @@ export class ApiService {
   messages = []
   users = []
   constructor(private httpClient: HttpClient,
-    private route: ActivatedRoute,
-  ) { }
+    private store: Store
+  ) { 
+    this.store.subscribe((store) => console.log(store))
+  }
 
   verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
 
