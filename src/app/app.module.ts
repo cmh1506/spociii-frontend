@@ -23,7 +23,6 @@ import { PostComponent } from './post/post.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { of } from 'rxjs';
-import { VerpackungFormComponent } from './verpackung-form/verpackung-form.component';
 import { MaterialFormComponent } from './material-form/material-form.component';
 import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
 import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
@@ -31,7 +30,6 @@ import { TransportmittelFormComponent } from './transportmittel-form/transportmi
 import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
-import { VerpackungListComponent } from './verpackung-list/verpackung-list.component';
 import { HomeComponent } from './home/home.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -40,6 +38,9 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -49,28 +50,7 @@ const routes = [
       return of(!!localStorage.getItem('token'))
     }],
     component: MaterialFormComponent
-  },
-  {
-    path: 'verpackung/:_id',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
-    component: VerpackungFormComponent
-  },
-  {
-    path: 'verpackung',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
-    component: VerpackungFormComponent
-  },
-  {
-    path: 'verpackungs',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
-    component: VerpackungListComponent
-  },
+  },  
   {
     path: 'energierueckgewinnung',
     canActivate: [() => {
@@ -92,6 +72,11 @@ const routes = [
     }],
     component: TransportmittelFormComponent
   },
+  { 
+    path: 'verpackung',
+    loadChildren: () =>
+      import('./verpackung/verpackung.module').then(m => m.VerpackungModule)
+  },
   {
     path: 'verarbeitung',
     canActivate: [() => {
@@ -111,6 +96,7 @@ const routes = [
   },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'posts', component: PostComponent },
+  
 ]
 
 
@@ -123,13 +109,11 @@ const routes = [
     UsersComponent,
     ProfileComponent,
     PostComponent,
-    VerpackungFormComponent,
     MaterialFormComponent,
     EnergierueckgewinnungFormComponent,
     NutzenergieCO2EquivalentFormComponent,
     TransportmittelFormComponent,
     VerarbeitungFormComponent,
-    VerpackungListComponent,
     HomeComponent
   ],
   imports: [
@@ -155,7 +139,13 @@ const routes = [
     MatTableModule,
     MatExpansionModule,
     MatCheckboxModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      name: 'Ngrx spoc',
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([])
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

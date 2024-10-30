@@ -20,11 +20,12 @@ export class ApiService {
   users = []
   constructor(private httpClient: HttpClient,
     private store: Store
-  ) { 
-    this.store.subscribe((store) => console.log(store))
-  }
+  ) { }
 
   verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+  .pipe(
+    tap((vs) => console.log(vs))
+  )
 
   materials$ = this.httpClient.get<Material[]>(this.path + '/materialRefs')
 

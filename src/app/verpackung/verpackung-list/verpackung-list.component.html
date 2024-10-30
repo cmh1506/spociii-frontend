@@ -1,4 +1,9 @@
-<div *ngFor="let verpackung of apiService.verpackungs$ | async">
+<div *ngIf="(errorMessage$ | async) !== ''">
+  Error: {{errorMessage$ | async}}
+</div>
+
+
+<div *ngFor="let verpackung of verpackungs$ | async">
   <mat-card [routerLink]="['/verpackung/', verpackung['_id']]" style="cursor: pointer;">
     <mat-card-content>{{verpackung["name"]}}</mat-card-content>
   </mat-card>

@@ -1,9 +1,38 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Verpackung } from '../models/verpackung';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { catchError, EMPTY, Observable, throwError } from 'rxjs';
+import { Berechnung } from '../models/berechnung';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerpackungService {
+  path = environment.path
 
-  constructor() { }
+  constructor(private httpClient: HttpClient,
+    private store: Store) { }
+
+  getAll(): Observable<Verpackung[]> {return this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+    .pipe(catchError(this.handleError))
+  }
+
+  getVerpackung(_id: string) {
+    return this.httpClient.get<Verpackung>(this.path + '/verpackung/' + _id)
+  }
+
+  getBerechnungs(_id: string) {
+    if (_id || _id !== '') {
+      return this.httpClient.get<Berechnung[]>(this.path + '/berechnungs/' + _id)
+    } else {
+      return EMPTY
+    }    
+  }
+  private handleError({ status }: HttpErrorResponse) {
+    return throwError(
+      () => `${status}: Something bad happened.`
+    );
+  }
 }

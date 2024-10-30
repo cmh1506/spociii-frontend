@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../../api.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Berechnung } from '../models/berechnung';
+import { Berechnung } from '../../models/berechnung';
 
 @Component({
   selector: 'app-verpackung-form',
