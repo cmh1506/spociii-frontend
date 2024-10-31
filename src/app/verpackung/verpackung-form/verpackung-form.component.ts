@@ -1,9 +1,13 @@
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Berechnung } from '../../models/berechnung';
+import { VerpackungState } from '../+state/verpackungs.reducer';
+import { selectSelectedVerpackung } from '../+state/verpackungs.selectors';
+import { VerpackungsPageActions } from '../+state/verpackungs.actions';
 
 @Component({
   selector: 'app-verpackung-form',
@@ -15,6 +19,7 @@ export class VerpackungFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private store: Store<VerpackungState>
   ) { }
 
   //energieCO2MVs$ = this.apiService.getEnergieCO2MVs
@@ -29,11 +34,11 @@ export class VerpackungFormComponent implements OnInit {
 
   ngOnInit(): void {
     const verpackung_id = this.route.snapshot.params['_id']
-    console.log("Verpackungsid: " + verpackung_id)
+    this.store.dispatch(VerpackungsPageActions.loadSelectedVerpackung(verpackung_id))
     if (!verpackung_id) {
       return
     }
-    this.apiService.getVerpackung(verpackung_id).subscribe((verpackung) => {
+    this.store.select(selectSelectedVerpackung).subscribe((verpackung) => {
       if (!verpackung) return
       for (let i = 1; i < verpackung.materialverwendungs.length; i++) {
         this.addMaterialVerwendung(i)

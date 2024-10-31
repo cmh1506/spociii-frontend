@@ -8,7 +8,13 @@ export const selectVerpackungs = createSelector(
   (verpackungState) => verpackungState.verpackungs
 )
 
+export const selectSelectedVerpackung = createSelector(
+  selectVerpackungsState,
+  (verpackungState) => verpackungState.selectedVerpackung
+)
+
 export const selectVerpackungsErrorMessage = createSelector(
   selectVerpackungsState,
   (verpackungState) => verpackungState.errorMessage
 )
+

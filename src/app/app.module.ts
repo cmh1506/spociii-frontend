@@ -41,6 +41,7 @@ import { RouterModule } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -139,13 +140,14 @@ const routes = [
     MatTableModule,
     MatExpansionModule,
     MatCheckboxModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
     StoreDevtoolsModule.instrument({
       name: 'Ngrx spoc',
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,
