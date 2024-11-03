@@ -10,7 +10,9 @@ import { Verarbeitung } from "./models/verarbeitung";
 import { Verpackung } from "./models/verpackung";
 import { Berechnung } from "./models/berechnung";
 import { Store } from "@ngrx/store";
-
+import { MaterialsState } from "./material/+state/materials.reducer";
+import { MaterialsPageActions } from "./material/+state/materials.actions";
+import { selectMaterials } from "./material/+state/material.selectors";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,15 +21,21 @@ export class ApiService {
   messages = []
   users = []
   constructor(private httpClient: HttpClient,
-    private store: Store
-  ) { }
+    private store: Store<MaterialsState>
+  ) { 
+    this.store.dispatch(MaterialsPageActions.loadMaterials())
+  }
+
+  
+
+  materials$ = this.store.select(selectMaterials)
 
   verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
   .pipe(
     tap((vs) => console.log(vs))
   )
 
-  materials$ = this.httpClient.get<Material[]>(this.path + '/materialRefs')
+  //materials$ = this.httpClient.get<Material[]>(this.path + '/materialRefs')
 
   energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
 
@@ -102,8 +110,7 @@ export class ApiService {
       return this.httpClient.get<Berechnung[]>(this.path + '/berechnungs/' + _id)
     } else {
       return EMPTY
-    }
-    
+    }    
   }
   
 

@@ -1,20 +1,37 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { VerpackungState } from "./verpackungs.reducer";
+import { getRouterSelectors } from "@ngrx/router-store";
+import * as fromVerpackungs from './verpackungs.reducer'
 
-export const selectVerpackungsState = createFeatureSelector<VerpackungState>('verpackungs')
+export const selectVerpackungsState =
+  createFeatureSelector<fromVerpackungs.VerpackungsState>('verpackungs');
 
 export const selectVerpackungs = createSelector(
   selectVerpackungsState,
-  (verpackungState) => verpackungState.verpackungs
-)
+  fromVerpackungs.selectVerpackungs
+);
 
-export const selectSelectedVerpackung = createSelector(
+export const selectBerechnungs = createSelector(
   selectVerpackungsState,
-  (verpackungState) => verpackungState.selectedVerpackung
-)
+  (verpackungsState) => verpackungsState.berechnungs
+);
+
+export const selectVerpackungsEntities = createSelector(
+  selectVerpackungsState,
+  fromVerpackungs.selectVerpackungsEntities
+);
 
 export const selectVerpackungsErrorMessage = createSelector(
   selectVerpackungsState,
-  (verpackungState) => verpackungState.errorMessage
-)
+  (verpackungsState) => verpackungsState.errorMessage
+);
+
+
+
+export const { selectRouteParams } = getRouterSelectors();
+
+export const selectVerpackungById = createSelector(
+  selectVerpackungsEntities,
+  selectRouteParams,
+  (verpackungEntities, { _id }) => verpackungEntities[_id]
+);
 

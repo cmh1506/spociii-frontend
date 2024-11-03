@@ -23,7 +23,7 @@ import { PostComponent } from './post/post.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { of } from 'rxjs';
-import { MaterialFormComponent } from './material-form/material-form.component';
+import { MaterialFormComponent } from './material/material-form/material-form.component';
 import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
 import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
 import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
@@ -42,6 +42,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { MaterialModule } from './material/material.module';
 
 const routes = [
   { path: 'register', component: RegisterComponent },
@@ -140,6 +141,7 @@ const routes = [
     MatTableModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MaterialModule,
     StoreModule.forRoot({router: routerReducer}),
     StoreDevtoolsModule.instrument({
       name: 'Ngrx spoc',
@@ -147,7 +149,7 @@ const routes = [
       logOnly: environment.production
     }),
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [ApiService, AuthService, {
     provide: HTTP_INTERCEPTORS,

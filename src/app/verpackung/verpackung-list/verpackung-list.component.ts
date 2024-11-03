@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { VerpackungsPageActions } from '../+state/verpackungs.actions';
 import { selectVerpackungs, selectVerpackungsErrorMessage } from '../+state/verpackungs.selectors';
-import { VerpackungState } from '../+state/verpackungs.reducer';
+import { VerpackungsState } from '../+state/verpackungs.reducer';
 
 @Component({
   selector: 'app-verpackung-list',
@@ -11,13 +11,18 @@ import { VerpackungState } from '../+state/verpackungs.reducer';
 })
 export class VerpackungListComponent implements OnInit{
   constructor(
-    private store: Store<VerpackungState>
+    private store: Store<VerpackungsState>
   ){}
+
   verpackungs$ = this.store.select(selectVerpackungs)
   errorMessage$ = this.store.select(selectVerpackungsErrorMessage)
 
   ngOnInit(): void {
     this.store.dispatch(VerpackungsPageActions.loadVerpackungs())    
+  }
+
+  selectVerpackung(_id: string){
+    //this.store.dispatch(VerpackungsPageActions.select)
   }
   
 }

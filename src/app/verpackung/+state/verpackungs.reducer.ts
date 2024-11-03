@@ -1,38 +1,93 @@
-import { createAction, createReducer, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.actions";
 import { Verpackung } from "src/app/models/verpackung";
+import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
+import { Berechnung } from "src/app/models/berechnung";
 
-export interface VerpackungState {
-  verpackungs: Verpackung[],
-  selectedVerpackung: Verpackung | null,
-  errorMessage: string
+export interface VerpackungsState extends EntityState<Verpackung>{
+  errorMessage: string,
+  berechnungs: Berechnung[]
 }
-const initialState: VerpackungState = {
-  verpackungs: [],
-  selectedVerpackung: null,
-  errorMessage: ''
+
+export const adapter: EntityAdapter<Verpackung> = createEntityAdapter<Verpackung>({
+  selectId: selectVerpackungsId
+  
+})
+
+export function selectVerpackungsId(a: Verpackung): string {
+  //In this case this would be optional since primary key is id
+  return a._id;
 }
+
+const initialState: VerpackungsState = adapter.getInitialState({
+  errorMessage: '',
+  berechnungs: []
+})
 
 export const verpackungReducer = createReducer(
   initialState,
-  on(VerpackungsAPIActions.verpackungsLoadedSuccess, (state, { verpackungs }) => ({
+  on(VerpackungsAPIActions.verpackungsLoadedSuccess, (state, { verpackungs }) =>
+    adapter.addMany(verpackungs, {
+      ...state,
+    })
+  ),
+  on(VerpackungsAPIActions.verpackungsLoadedFail, (state, { message }) => ({
     ...state,
-    verpackungs,
-    errorMessage: ''
+    errorMessage: message,
   })),
-  on(VerpackungsAPIActions.verpackungsLoadedFailure, (state, { message }) => ({
+  on(VerpackungsPageActions.addVerpackung, (state) => ({
     ...state,
-    verpackungs: [],
-    errorMessage: message
+    errorMessage: '',
   })),
-  on(VerpackungsAPIActions.selectedVerpackungLoadedSuccess, (state, { selectedVerpackung }) => ({
+  on(VerpackungsAPIActions.verpackungAddedSuccess, (state, { verpackung }) =>
+    adapter.addOne(verpackung, {
+      ...state,
+    })
+  ),
+  on(VerpackungsAPIActions.verpackungAddedFail, (state, { message }) => ({
     ...state,
-    selectedVerpackung,
-    errorMessage: ''
+    errorMessage: message,
   })),
-  on(VerpackungsAPIActions.selectedVerpackungLoadedFailure, (state, { message }) => ({
+  on(VerpackungsPageActions.updateVerpackung, (state) => ({
     ...state,
-    selectedVerpackung: null,
-    errorMessage: message
-  }))
+    errorMessage: '',
+  })),
+  on(VerpackungsAPIActions.verpackungUpdatedSuccess, (state, { update }) =>
+    adapter.updateOne(update, {
+      ...state,
+    })
+  ),
+  on(VerpackungsAPIActions.verpackungUpdatedFail, (state, { message }) => ({
+    ...state,
+    errorMessage: message,
+  })),
+  on(VerpackungsPageActions.deleteVerpackung, (state) => ({
+    ...state,
+    errorMessage: '',
+  })),
+  on(VerpackungsAPIActions.verpackungDeletedSuccess, (state, { _id }) =>
+    adapter.removeOne(_id, {
+      ...state
+    })
+  ),
+  on(VerpackungsAPIActions.verpackungDeletedFail, (state, { message }) => ({
+    ...state,
+    errorMessage: message,
+  })),
+
+  on(VerpackungsAPIActions.berechnungsLoadedSuccess, (state, action) => {
+     return {
+      ...state,
+      berechnungs: action.berechnungs
+    }}
+  ),
+  on(VerpackungsAPIActions.verpackungsLoadedFail, (state, { message }) => ({
+    ...state,
+    errorMessage: message,
+  })),
 )
+
+export const { selectAll, selectEntities } = adapter.getSelectors();
+
+export const selectVerpackungs = selectAll;
+export const selectVerpackungsEntities = selectEntities;

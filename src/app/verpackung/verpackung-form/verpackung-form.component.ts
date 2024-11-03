@@ -5,9 +5,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Berechnung } from '../../models/berechnung';
-import { VerpackungState } from '../+state/verpackungs.reducer';
-import { selectSelectedVerpackung } from '../+state/verpackungs.selectors';
+import { VerpackungsState } from '../+state/verpackungs.reducer';
+import { selectBerechnungs, selectVerpackungById } from '../+state/verpackungs.selectors';
 import { VerpackungsPageActions } from '../+state/verpackungs.actions';
+import { Verpackung } from 'src/app/models/verpackung';
 
 @Component({
   selector: 'app-verpackung-form',
@@ -19,33 +20,39 @@ export class VerpackungFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<VerpackungState>
-  ) { }
+    private store: Store<VerpackungsState>
+  ) {
+    //this.materialStore.dispatch(MaterialsPageActions.loadMaterials()) 
+  }
 
-  //energieCO2MVs$ = this.apiService.getEnergieCO2MVs
+  materials$ = this.apiService.materials$
+  verpackung!: Verpackung
 
   displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
     'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
     'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
     'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
 
-  berechnungs$!: Observable<Berechnung[]>
+  berechnungs$ = this.store.select(selectBerechnungs)
 
 
   ngOnInit(): void {
-    const verpackung_id = this.route.snapshot.params['_id']
-    this.store.dispatch(VerpackungsPageActions.loadSelectedVerpackung(verpackung_id))
+    /* const verpackung_id = this.route.snapshot.params['_id']
+    
     if (!verpackung_id) {
       return
-    }
-    this.store.select(selectSelectedVerpackung).subscribe((verpackung) => {
+    } */
+    //this.store.dispatch(VerpackungsPageActions.loadSelectedVerpackung({_id: verpackung_id}))
+    this.store.select(selectVerpackungById).subscribe((verpackung) => {
       if (!verpackung) return
+      this.verpackung = verpackung
       for (let i = 1; i < verpackung.materialverwendungs.length; i++) {
         this.addMaterialVerwendung(i)
       }
       this.verpackungForm.setValue(verpackung)
+      this.store.dispatch(VerpackungsPageActions.loadBerechnungs({ verpackungId: verpackung._id }))
     })
-    this.berechnungs$ = this.apiService.getBerechnungs(verpackung_id)
+
 
 
   }
@@ -77,9 +84,21 @@ export class VerpackungFormComponent implements OnInit {
   }
 
   saveVerpackung() {
+    if (this.verpackungForm.valid) {
+      if (this.verpackungForm.dirty) {
+        const verpackung: Partial<Verpackung> = { ...this.verpackungForm.value, _id: this.verpackung?._id ?? 0 } as Partial<Verpackung>
+        if (this.verpackung) {
+          this.store.dispatch(VerpackungsPageActions.updateVerpackung({ verpackung }))
+        } else {          
+          this.store.dispatch(VerpackungsPageActions.addVerpackung({ verpackung }))
+        }
+      }
+    }
+
+    /* this.store.dispatch(VerpackungsPageActions.addVerpackung(this.verpackungForm.getRawValue() ))
     this.apiService.saveVerpackung(this.verpackungForm.getRawValue()).subscribe({
-      next: () => this.router.navigate(['/verpackungs'])
-    })
+      //next: () => this.router.navigate(['/verpackungs']) 
+    })*/
   }
 
   addMaterialVerwendung(schicht: any) {
