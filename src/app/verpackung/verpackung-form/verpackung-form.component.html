@@ -1,11 +1,7 @@
-<mat-expansion-panel hideToggle>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{verpackungForm.controls.name.value}}
-    </mat-panel-title>
 
-  </mat-expansion-panel-header>
-
+    
+    
+  
 
   <mat-tab-group>
     <mat-tab label="Datenerfassung" class="mat-tabs">
@@ -22,7 +18,7 @@
               <mat-label>Beschreibung</mat-label>
               <input matInput formControlName="beschreibung" name="beschreibung">
             </mat-form-field>
-            <br>
+            
           </section>
           <section>
             <h3>Schichten</h3>
@@ -117,6 +113,44 @@
       </div>
 
     </mat-tab>
+    <mat-tab label="Berechnung Gesamt" class="mat-tabs">
+      <table class="table" >
+        <thead class="thead">
+  
+        <tr class="d-flex">
+          <th class="col-1">Umweltwirkung Gesamtverpackung:</th>
+          <th class="col-1">CO<sub>2</sub>-equiv. [g]</th>
+          <th class="col-1">Energie [kJ]</th>
+        </tr>
+        </thead>
+        <tr class="d-flex">
+          <td class="col-1">Material:</td>
+          <td class="col-1">{{materialCO2Aufwand.toFixed(2)}} </td>
+          <td class="col-1">{{materialAufwandEnergie.toFixed(2)}} </td>
+        </tr>
+        <tr class="d-flex">
+          <td class="col-1">Cradle to Gate:</td>
+          <td class="col-1">{{cradleToGate.toFixed(2)}} </td>
+          <td class="col-1">{{cradleToGateEnergie.toFixed(2)}} </td>
+        </tr>
+        <tr class="d-flex">
+          <td class="col-1">Cradle to Grave:</td>
+          <td class="col-1">{{cradleToGrave.toFixed(2)}} </td>
+          <td class="col-1">{{cradleToGraveEnergie.toFixed(2)}} </td>
+        </tr>
+        <tr class="d-flex">
+          <td class="col-1">Cradle to Grave mit CO<sub>2</sub>-Gutschrift:</td>
+          <td class="col-1">{{cradleToGraveCO2Gutschrift.toFixed(2)}} </td>
+          <td class="col-1">{{cradleToGraveGutschriftEnergie.toFixed(2)}} </td>
+        </tr>
+        <tr class="d-flex">
+          <td class="col-1">Cradle to Grave mit indirektem CO<sub>2</sub>-für Biofuel:</td>
+          <td class="col-1">{{cradleToGraveCO2GutschriftBioFuel.toFixed(2)}} </td>
+          <td class="col-1"></td>
+        </tr>
+      </table>
+    </mat-tab>
+    
     <mat-tab label="Berechnung Detail" class="mat-tabs">
       <div class="wrapper">
         <table mat-table [dataSource]="berechnungs$" class="mat-elevation-z8">
@@ -166,7 +200,7 @@
             <th *matHeaderCellDef mat-header-cell>Bio CO2-eq. [g]</th>
             <td *matCellDef="let berechnung" mat-cell> {{berechnung.indirectco2Biofuel | number: '1.2-2'}} </td>
           </ng-container>
-          
+
           <ng-container matColumnDef="verbrennungBioCo2Eq">
             <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
             <td *matCellDef="let berechnung" mat-cell> {{berechnung.verbrennungBioCo2Eq | number: '1.2-2'}} </td>
@@ -175,7 +209,7 @@
             <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
             <td *matCellDef="let berechnung" mat-cell> {{berechnung.herstellungBioCo2Eq | number: '1.2-2'}} </td>
           </ng-container>
-          
+
           <ng-container matColumnDef="Material-group">
             <th mat-header-cell *matHeaderCellDef [attr.colspan]="3">
               Material
@@ -201,5 +235,6 @@
     </mat-tab>
   </mat-tab-group>
 
+  
 
-</mat-expansion-panel>
+
