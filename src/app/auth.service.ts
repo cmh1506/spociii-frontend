@@ -28,12 +28,13 @@ export class AuthService {
   registerUser(userRegistrationData: any) {
     this.httpClient.post(this.path + '/register', userRegistrationData).subscribe((res: any) => {
       this.saveToken(res.token)
+      this.router.navigate(['/verpackung/list']);
     })
   }
   loginUser(loginData: { email: string; pwd: string; name: string; description: string; }) {
     this.httpClient.post<any>(this.path + '/login', loginData).subscribe((res: any) => {
       this.saveToken(res.token)
-      this.router.navigate(['/verpackungs']);
+      this.router.navigate(['/verpackung/list']);
 
     })
   }
