@@ -146,10 +146,10 @@ export class VerpackungFormComponent implements OnInit {
     if (this.verpackungForm.valid) {
       if (this.verpackungForm.dirty) {
         const verpackung: Partial<Verpackung> = { ...this.verpackungForm.value, _id: this.verpackung?._id ?? 0 } as Partial<Verpackung>
-        if (this.verpackung) {
+        if (verpackung._id) {
           this.store.dispatch(VerpackungsPageActions.updateVerpackung({ verpackung }))
         } else {
-          this.store.dispatch(VerpackungsPageActions.addVerpackung({ verpackung }))
+          this.store.dispatch(VerpackungsPageActions.addVerpackung({ verpackung }))          
         }
       }
     }
