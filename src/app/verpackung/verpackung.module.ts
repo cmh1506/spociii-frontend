@@ -9,28 +9,23 @@ import { StoreModule } from '@ngrx/store';
 import { verpackungReducer } from './+state/verpackungs.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { VerpackungsEffects } from './+state/verpackungs.effects';
+import { authGuard } from '../auth.guard';
 
 
 const routes = [
   {
     path: 'list',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: VerpackungListComponent
   },
   {
     path: ':_id',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: VerpackungFormComponent
   },
   {
     path: '',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: VerpackungFormComponent
   },
 

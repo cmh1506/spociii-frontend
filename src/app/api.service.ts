@@ -18,12 +18,10 @@ import { selectMaterials } from "./material/+state/material.selectors";
 })
 export class ApiService {
   path = environment.path
-  messages = []
-  users = []
   constructor(private httpClient: HttpClient,
     private store: Store<MaterialsState>
   ) { 
-    this.store.dispatch(MaterialsPageActions.loadMaterials())
+    
   }
 
   
@@ -46,35 +44,7 @@ export class ApiService {
   verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitungs')
 
 
-  getMessages(userId: string) {
-    this.httpClient.get(this.path + '/posts/' + userId).subscribe((res: any) => {
-      this.messages = res
-    })
-  }
-  postMessage(message: any) {
-    this.httpClient.post(this.path + '/post', message).subscribe((res: any) => {
-      console.log(message)
-      this.messages = res
-    })
-  }
-
-  createVerpackung(verpackung: any) {
-    console.log(this.path)
-    this.httpClient.post(this.path + '/verpackung', verpackung).subscribe((res: any) => {
-      this.messages = res
-    })
-  }
-
-  getUsers() {
-    this.httpClient.get(this.path + '/users').subscribe((res: any) => {
-      this.users = res
-    })
-  }
-
-  getProfile(id: string) {
-    return this.httpClient.get<any>(this.path + '/profile/' + id)
-  }
-
+ 
   saveMaterial(material: Partial<Material>): Observable<Material> {
     if (!material._id || material._id === '') {
       let newMaterial: Partial<Material> = { ...material };

@@ -33,12 +33,6 @@ export class VerpackungService {
     }
   }
 
-  /* add(verpackung: Partial<Verpackung>): Observable<Verpackung> {
-    return this.httpClient
-      .post<Verpackung>(this.path, verpackung)
-      .pipe(catchError(this.handleError)); 
-  }*/
-
   add(verpackung: Partial<Verpackung>): Observable<Verpackung> {
     let newVerpackung: Partial<Verpackung> = { ...verpackung };
       return this.httpClient.post<Verpackung>(this.path + '/verpackung', newVerpackung)

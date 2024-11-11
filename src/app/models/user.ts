@@ -2,5 +2,13 @@ export interface User {
   email: string;
   pwd: string;
   name: string;
-  description: string;
+}
+
+export interface LoginInfo {
+  email: string;
+  pwd: string;
+}
+
+export interface Token {
+  token: string
 }

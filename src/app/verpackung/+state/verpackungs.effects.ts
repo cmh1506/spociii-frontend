@@ -12,9 +12,7 @@ export class VerpackungsEffects {
     private actions$: Actions
   ) { }
 
-  ngrxOnInitEffects() {
-    return VerpackungsPageActions.loadVerpackungs();
-  }
+  
 
   /* loadVerpackungs$ = createEffect(() =>
     this.actions$.pipe(

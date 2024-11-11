@@ -6,23 +6,16 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MessagesComponent } from './messages/messages.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { RegisterComponent } from './register/register.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './users/users.component';
-import { ProfileComponent } from './profile/profile.component';
-import { PostComponent } from './post/post.component';
 import { AuthService } from './auth.service';
 import { AuthInterceptorService } from './auth-interceptor.service';
-import { of } from 'rxjs';
 import { MaterialFormComponent } from './material/material-form/material-form.component';
 import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
 import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
@@ -30,7 +23,6 @@ import { TransportmittelFormComponent } from './transportmittel-form/transportmi
 import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
-import { HomeComponent } from './home/home.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -43,35 +35,31 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MaterialModule } from './material/material.module';
+import { UserModule } from './user/user.module';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { authGuard } from './auth.guard';
 
 const routes = [
-  { path: 'register', component: RegisterComponent },
+  
   {
     path: 'material',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: MaterialFormComponent
   },  
   {
     path: 'energierueckgewinnung',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: EnergierueckgewinnungFormComponent
   },
   {
     path: 'nutzenergieCO2Equivalent',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: NutzenergieCO2EquivalentFormComponent
   },
   {
     path: 'transportmittel',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: TransportmittelFormComponent
   },
   { 
@@ -81,23 +69,13 @@ const routes = [
   },
   {
     path: 'verarbeitung',
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }],
+    canActivate: [authGuard],
     component: VerarbeitungFormComponent
   },
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '**', redirectTo: 'home' },
-  {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [() => {
-      return of(!!localStorage.getItem('token'))
-    }]
-  },
-  { path: 'profile/:id', component: ProfileComponent },
-  { path: 'posts', component: PostComponent },
+  { path: '**', redirectTo: 'login' },
+  
   
 ]
 
@@ -105,18 +83,11 @@ const routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MessagesComponent,
-    RegisterComponent,
-    LoginComponent,
-    UsersComponent,
-    ProfileComponent,
-    PostComponent,
     MaterialFormComponent,
     EnergierueckgewinnungFormComponent,
     NutzenergieCO2EquivalentFormComponent,
     TransportmittelFormComponent,
     VerarbeitungFormComponent,
-    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -142,6 +113,7 @@ const routes = [
     MatExpansionModule,
     MatCheckboxModule,
     MaterialModule,
+    UserModule,
     StoreModule.forRoot({router: routerReducer}),
     StoreDevtoolsModule.instrument({
       name: 'Ngrx spoc',
