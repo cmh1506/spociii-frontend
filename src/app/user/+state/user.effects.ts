@@ -4,9 +4,9 @@ import { UserAPIActions, UserPageActions } from "./user.actions";
 import { catchError, concatMap, map, of, tap } from "rxjs";
 import { UserService } from "../user.service";
 import { Router } from "@angular/router";
-import { MaterialsState } from "src/app/material/+state/materials.reducer";
+import { MaterialsState } from "src/app/+state/materials.reducer";
 import { Store } from "@ngrx/store";
-import { MaterialsPageActions } from "src/app/material/+state/materials.actions";
+import { MaterialsPageActions } from "src/app/+state/materials.actions";
 
 @Injectable()
 export class UserEffects {

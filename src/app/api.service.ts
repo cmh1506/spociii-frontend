@@ -10,9 +10,8 @@ import { Verarbeitung } from "./models/verarbeitung";
 import { Verpackung } from "./models/verpackung";
 import { Berechnung } from "./models/berechnung";
 import { Store } from "@ngrx/store";
-import { MaterialsState } from "./material/+state/materials.reducer";
-import { MaterialsPageActions } from "./material/+state/materials.actions";
-import { selectMaterials } from "./material/+state/material.selectors";
+import { MaterialsState } from "./+state/materials.reducer";
+import { selectMaterials } from "./+state/material.selectors";
 @Injectable({
   providedIn: 'root'
 })

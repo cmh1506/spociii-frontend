@@ -34,11 +34,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { MaterialModule } from './material/material.module';
 import { UserModule } from './user/user.module';
 import { RegisterComponent } from './user/register/register.component';
 import { LoginComponent } from './user/login/login.component';
 import { authGuard } from './auth.guard';
+import { materialsReducer } from './+state/materials.reducer';
+import { MaterialEffects } from './+state/materials.effects';
 
 const routes = [
   
@@ -112,15 +113,14 @@ const routes = [
     MatTableModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MaterialModule,
     UserModule,
-    StoreModule.forRoot({router: routerReducer}),
+    StoreModule.forRoot({router: routerReducer, materials: materialsReducer}),
     StoreDevtoolsModule.instrument({
       name: 'Ngrx spoc',
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([MaterialEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [ApiService, AuthService, {

@@ -1,6 +1,6 @@
 import { getRouterSelectors } from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromMaterials from './materials.reducer';
+import * as fromMaterials from '../+state/materials.reducer';
 
 export const selectMaterialsState =
   createFeatureSelector<fromMaterials.MaterialsState>('materials');
