@@ -7,7 +7,6 @@ import { Router } from "@angular/router";
 import { MaterialsState } from "src/app/material/+state/materials.reducer";
 import { Store } from "@ngrx/store";
 import { MaterialsPageActions } from "src/app/material/+state/materials.actions";
-import { Token } from "@angular/compiler";
 
 @Injectable()
 export class UserEffects {

@@ -152,12 +152,14 @@ export class VerpackungFormComponent implements OnInit {
           this.store.dispatch(VerpackungsPageActions.addVerpackung({ verpackung }))          
         }
       }
-    }
+    }    
+  }
 
-    /* this.store.dispatch(VerpackungsPageActions.addVerpackung(this.verpackungForm.getRawValue() ))
-    this.apiService.saveVerpackung(this.verpackungForm.getRawValue()).subscribe({
-      //next: () => this.router.navigate(['/verpackungs']) 
-    })*/
+  deleteVerpackung() {
+    var _id: string = this.verpackungForm.value._id ? this.verpackungForm.value._id : ''
+    if (_id) {
+      this.store.dispatch(VerpackungsPageActions.deleteVerpackung({ _id }))
+    }    
   }
 
   addMaterialVerwendung(schicht: any) {

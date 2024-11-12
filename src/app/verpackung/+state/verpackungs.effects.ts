@@ -5,11 +5,13 @@ import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.act
 import { catchError, concatMap, exhaustMap, map, mergeMap, of, switchMap, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { VerpackungsState } from "./verpackungs.reducer";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class VerpackungsEffects {
   constructor(private verpackungsService: VerpackungService,
-    private actions$: Actions
+    private actions$: Actions,
+    private router: Router,
   ) { }
 
   
@@ -106,7 +108,16 @@ export class VerpackungsEffects {
     )
   );
   
-
+  redirectToVerpackungsList = createEffect(
+    () =>
+    this.actions$.pipe(
+      ofType(
+        VerpackungsAPIActions.verpackungDeletedSuccess
+      ),
+      tap(() => this.router.navigate(['/verpackung/list']))
+    ),
+    { dispatch: false }
+  )
   
 
 }
