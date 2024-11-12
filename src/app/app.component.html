@@ -30,9 +30,9 @@
     </button>
   </mat-menu>
   <span style="flex: 1 1 auto;"></span>
-  <button mat-button *ngIf="!(authService.isAuthenticated | async)" routerLink="/register">Register</button>
-  <button mat-button *ngIf="!(authService.isAuthenticated | async)" routerLink="/login">Login</button>
-  <button mat-button *ngIf="(authService.isAuthenticated | async)" (click)="authService.logout()">Log out</button>
+  <button mat-button *ngIf="!(userService.isAuthenticated | async)" routerLink="/register">Register</button>
+  <button mat-button *ngIf="!(userService.isAuthenticated | async)" routerLink="/login">Login</button>
+  <button mat-button *ngIf="(userService.isAuthenticated | async)" (click)="userService.logout()">Log out</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
 

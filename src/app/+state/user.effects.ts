@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserAPIActions, UserPageActions } from "./user.actions";
 import { catchError, concatMap, map, of, tap } from "rxjs";
-import { UserService } from "../user.service";
 import { Router } from "@angular/router";
 import { MaterialsState } from "src/app/+state/materials.reducer";
 import { Store } from "@ngrx/store";
 import { MaterialsPageActions } from "src/app/+state/materials.actions";
+import { UserService } from "../user.service";
 
 @Injectable()
 export class UserEffects {

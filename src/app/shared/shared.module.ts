@@ -10,7 +10,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AuthService } from '../auth.service';
 import { AuthInterceptorService } from '../auth-interceptor.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,13 +21,30 @@ import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { ApiService } from '../api.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserService } from '../user.service';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,    
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatInputModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatListModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatCheckboxModule,    
   ],
   exports: [
     CommonModule,
@@ -51,7 +67,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     StoreModule,
     RouterModule
   ],
-  providers: [ApiService, AuthService, {
+  providers: [ApiService, UserService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true
