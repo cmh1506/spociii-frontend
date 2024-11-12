@@ -49,7 +49,7 @@ export class VerpackungService {
   }
 
   delete(_id: string): Observable<unknown> {
-    const url = `${this.path}/${_id}`;
+    const url = `${this.path}/verpackung/${_id}`;
     return this.httpClient.delete(url).pipe(catchError(this.handleError));
   }
 
