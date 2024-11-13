@@ -9,6 +9,7 @@ import { VerpackungsState } from '../+state/verpackungs.reducer';
 import { selectBerechnungs, selectVerpackungById } from '../+state/verpackungs.selectors';
 import { VerpackungsPageActions } from '../+state/verpackungs.actions';
 import { Verpackung } from 'src/app/models/verpackung';
+import { TableUtil } from 'src/app/tableUtil';
 
 @Component({
   selector: 'app-verpackung-form',
@@ -218,6 +219,10 @@ export class VerpackungFormComponent implements OnInit {
       return 1; // sort in descending order
     }))
 
+  }
+  //berechnungDetail
+  exportTable(){
+    TableUtil.exportToExcel("berechnungDetail");
   }
 
 
