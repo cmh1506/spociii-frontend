@@ -153,7 +153,12 @@
     
     <mat-tab label="Berechnung Detail" class="mat-tabs">
       <div class="wrapper">
-        <table mat-table [dataSource]="berechnungs$" class="mat-elevation-z8">
+        <div class="export-container">
+          <button mat-raised-button color="primary" (click)="exportTable()">
+            Export
+          </button>
+        </div>
+        <table id="berechnungDetail" mat-table [dataSource]="berechnungs$" class="mat-elevation-z8">
           <ng-container matColumnDef="material">
             <th *matHeaderCellDef mat-header-cell></th>
             <td *matCellDef="let berechnung" mat-cell> {{berechnung.material}} </td>
