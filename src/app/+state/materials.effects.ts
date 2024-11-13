@@ -16,9 +16,9 @@ import { MaterialService } from '../material.service';
 @Injectable()
 export class MaterialEffects {
 
-  ngrxOnInitEffects() {
-    return MaterialsPageActions.loadMaterials();
-  }
+  /* ngrxOnInitEffects() {
+    //return MaterialsPageActions.loadMaterials();
+  } */
   
 
   loadMaterials$ = createEffect(() =>

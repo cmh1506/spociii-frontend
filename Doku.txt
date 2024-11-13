@@ -3,3 +3,4 @@ npm install @ngrx/store-devtools --legacy-peer-deps
 npm install @ngrx/effects --legacy-peer-deps
 npm install @ngrx/router-store --legacy-peer-deps
 npm install @ngrx/entity --legacy-peer-deps
+npm install xlsx --legacy-peer-deps

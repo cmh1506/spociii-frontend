@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, tap } from 'rxjs';
 import { Berechnung } from '../../models/berechnung';
@@ -129,12 +129,12 @@ export class VerpackungFormComponent implements OnInit {
 
     return this.fb.nonNullable.group({
       layer: schicht,
-      materialId: [''],
-      verarbeitungId: [''],
+      materialId: ['', Validators.required],
+      verarbeitungId: ['', Validators.required],
       recyclingverfahrenId: [''],
-      energierueckgewinnungId: [''],
-      transportmittelId: [''],
-      menge: 0,
+      energierueckgewinnungId: ['', Validators.required],
+      transportmittelId: ['', Validators.required],
+      menge: [0, Validators.min(0.01)],
       flaeche: 0,
       dicke: 0,
       recyclingQuote: 0,
