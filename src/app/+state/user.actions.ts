@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { LoginInfo, Token, User } from "src/app/models/user";
+import { LoginInfo, Token, User } from "../models/user";
 
 export const UserPageActions = createActionGroup({
   source: 'User Page',

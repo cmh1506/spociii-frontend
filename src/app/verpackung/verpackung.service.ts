@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Verpackung } from '../models/verpackung';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, Observable, tap, throwError } from 'rxjs';
 import { Berechnung } from '../models/berechnung';
 import { VerpackungsPageActions } from './+state/verpackungs.actions';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

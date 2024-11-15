@@ -1,6 +1,6 @@
 import { Update } from "@ngrx/entity";
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { Material } from "src/app/models/material";
+import { Material } from "../models/material";
 
 export const MaterialsPageActions = createActionGroup({
   source: 'Materials Page',

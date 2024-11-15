@@ -4,12 +4,11 @@ import { ApiService } from '../../api.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, tap } from 'rxjs';
-import { Berechnung } from '../../models/berechnung';
 import { VerpackungsState } from '../+state/verpackungs.reducer';
 import { selectBerechnungs, selectVerpackungById } from '../+state/verpackungs.selectors';
 import { VerpackungsPageActions } from '../+state/verpackungs.actions';
-import { Verpackung } from 'src/app/models/verpackung';
-import { TableUtil } from 'src/app/tableUtil';
+import { Verpackung } from '../../models/verpackung';
+import { TableUtil } from '../../tableUtil';
 
 @Component({
   selector: 'app-verpackung-form',

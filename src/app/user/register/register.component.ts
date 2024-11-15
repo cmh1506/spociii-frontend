@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UserPageActions } from 'src/app/+state/user.actions';
-import { UserState } from 'src/app/+state/user.reducer';
-import { selectUserErrorMessage } from 'src/app/+state/user.selectors';
-import { User } from 'src/app/models/user';
-
+import { UserState } from '../../+state/user.reducer';
+import { selectUserErrorMessage } from '../../+state/user.selectors';
+import { UserPageActions } from '../../+state/user.actions';
+import { User } from '../../models/user';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

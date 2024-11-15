@@ -3,10 +3,10 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserAPIActions, UserPageActions } from "./user.actions";
 import { catchError, concatMap, map, of, tap } from "rxjs";
 import { Router } from "@angular/router";
-import { MaterialsState } from "src/app/+state/materials.reducer";
 import { Store } from "@ngrx/store";
-import { MaterialsPageActions } from "src/app/+state/materials.actions";
 import { UserService } from "../user.service";
+import { MaterialsState } from "./materials.reducer";
+import { MaterialsPageActions } from "./materials.actions";
 
 @Injectable()
 export class UserEffects {
@@ -22,7 +22,7 @@ export class UserEffects {
       concatMap(({user}) => 
         this.userService.registerUser(user).pipe(
           map((token) =>
-            UserAPIActions.userRegistrationSuccess({token})
+            UserAPIActions.userRegistrationSuccess({token: token})
           ),
           catchError((error) => 
             of(UserAPIActions.userRegistrationFailure({message: error}))

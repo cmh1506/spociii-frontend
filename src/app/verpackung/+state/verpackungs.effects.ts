@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
-import { VerpackungService } from "../verpackung.service";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.actions";
-import { catchError, concatMap, exhaustMap, map, mergeMap, of, switchMap, tap } from "rxjs";
-import { Store } from "@ngrx/store";
-import { VerpackungsState } from "./verpackungs.reducer";
 import { Router } from "@angular/router";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, concatMap, exhaustMap, map, mergeMap, of, tap } from "rxjs";
+import { VerpackungService } from "../verpackung.service";
+import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.actions";
 
 @Injectable()
 export class VerpackungsEffects {

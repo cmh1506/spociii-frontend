@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store"
 import { UserAPIActions, UserPageActions } from "./user.actions"
-import { Token } from "src/app/models/user"
+import { Token } from "../models/user"
 
 export interface UserState {
   token: Token | null

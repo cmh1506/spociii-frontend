@@ -1,8 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
 import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.actions";
-import { Verpackung } from "src/app/models/verpackung";
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { Berechnung } from "src/app/models/berechnung";
+import { Verpackung } from "../../models/verpackung";
+import { Berechnung } from "../../models/berechnung";
 
 export interface VerpackungsState extends EntityState<Verpackung>{
   errorMessage: string,

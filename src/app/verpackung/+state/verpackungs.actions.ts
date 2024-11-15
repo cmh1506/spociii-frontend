@@ -1,7 +1,7 @@
 import { Update } from "@ngrx/entity";
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { Berechnung } from "src/app/models/berechnung";
-import { Verpackung } from "src/app/models/verpackung";
+import { Verpackung } from "../../models/verpackung";
+import { Berechnung } from "../../models/berechnung";
 
 export const VerpackungsPageActions = createActionGroup({
   source: 'Verpackungs Page',

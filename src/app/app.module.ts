@@ -6,30 +6,22 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from 'src/environments/environment';
 import { MaterialEffects } from './+state/materials.effects';
 import { materialsReducer } from './+state/materials.reducer';
 import { UserEffects } from './+state/user.effects';
 import { userReducer } from './+state/user.reducer';
-import { ApiService } from './api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
-import { EnergierueckgewinnungFormComponent } from './energierueckgewinnung-form/energierueckgewinnung-form.component';
-import { NutzenergieCO2EquivalentFormComponent } from './nutzenergie-co2-equivalent-form/nutzenergie-co2-equivalent-form.component';
 import { SharedModule } from './shared/shared.module';
-import { TransportmittelFormComponent } from './transportmittel-form/transportmittel-form.component';
-import { UserModule } from './user/user.module';
-import { VerarbeitungFormComponent } from './verarbeitung-form/verarbeitung-form.component';
 import { UserService } from './user.service';
+import { UserModule } from './user/user.module';
+import { environment } from '../environments/environment.prod';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    EnergierueckgewinnungFormComponent,
-    NutzenergieCO2EquivalentFormComponent,
-    TransportmittelFormComponent,
-    VerarbeitungFormComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

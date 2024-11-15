@@ -1,6 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { LoginInfo, Token, User } from './models/user';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -8,6 +7,7 @@ import { UserState } from './+state/user.reducer';
 import { Router } from '@angular/router';
 import { selectUserAuthenticated } from './+state/user.selectors';
 import { UserPageActions } from './+state/user.actions';
+import { environment } from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

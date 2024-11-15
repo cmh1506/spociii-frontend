@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
-import { Material } from "src/app/models/material";
 import { MaterialsAPIActions, MaterialsPageActions } from "./materials.actions";
+import { Material } from "../models/material";
 
 
 export interface MaterialsState extends EntityState<Material> {}

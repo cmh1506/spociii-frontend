@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { EMPTY, Observable, of, tap } from "rxjs";
-import { environment } from "src/environments/environment";
 import { Material } from "./models/material";
 import { Energierueckgewinnung } from "./models/energierueckgewinnung";
 import { NutzenergieCO2Equivalent } from "./models/nutzenergieCO2Equivalent";
@@ -12,6 +11,7 @@ import { Berechnung } from "./models/berechnung";
 import { Store } from "@ngrx/store";
 import { MaterialsState } from "./+state/materials.reducer";
 import { selectMaterials } from "./+state/material.selectors";
+import { environment } from "../environments/environment.prod";
 @Injectable({
   providedIn: 'root'
 })
