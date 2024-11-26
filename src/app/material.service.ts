@@ -16,7 +16,7 @@ export class MaterialService {
   materialsAPIUrl = this.path 
 
   getAll(): Observable<Material[]> {
-    return this.http.get<Material[]>(this.path + '/materialRefs')
+    return this.http.get<Material[]>(this.path + '/material')
   }
 
   getById(id: number) {

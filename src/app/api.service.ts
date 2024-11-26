@@ -27,20 +27,20 @@ export class ApiService {
 
   materials$ = this.store.select(selectMaterials)
 
-  verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+  verpackungs$ = this.httpClient.get<Verpackung[]>(this.path + '/verpackung')
   .pipe(
     tap((vs) => console.log(vs))
   )
 
   //materials$ = this.httpClient.get<Material[]>(this.path + '/materialRefs')
 
-  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
+  energierueckgewinnungs = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnung')
 
   nutzenergieCO2Equivalents$ = this.httpClient.get<NutzenergieCO2Equivalent[]>(this.path + '/nutzenergieCO2Equivalents')
 
-  transportmittels$ = this.httpClient.get<Transportmittel[]>(this.path + '/transportmittels')
+  transportmittels$ = this.httpClient.get<Transportmittel[]>(this.path + '/transportmittel')
 
-  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitungs')
+  verarbeitungs$ = this.httpClient.get<Verarbeitung[]>(this.path + '/verarbeitung')
 
 
  
@@ -64,7 +64,7 @@ export class ApiService {
       return this.httpClient.put<Energierueckgewinnung>(this.path + '/energierueckgewinnung', energierueckgewinnung)
   }
 
-  energierueckgewinnungs$ = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnungs')
+  energierueckgewinnungs$ = this.httpClient.get<Energierueckgewinnung[]>(this.path + '/energierueckgewinnung')
   .pipe(
     tap(data => console.log('Energierueckgewinnungs: ', JSON.stringify(data)))
   );

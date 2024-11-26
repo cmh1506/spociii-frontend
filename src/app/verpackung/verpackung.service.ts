@@ -17,7 +17,7 @@ export class VerpackungService {
     private store: Store) { }
 
   getAll(): Observable<Verpackung[]> {
-    return this.httpClient.get<Verpackung[]>(this.path + '/verpackungs')
+    return this.httpClient.get<Verpackung[]>(this.path + '/verpackung')
       .pipe(catchError(this.handleError))
   }
 
