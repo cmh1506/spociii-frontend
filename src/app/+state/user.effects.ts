@@ -7,13 +7,22 @@ import { Store } from "@ngrx/store";
 import { UserService } from "../user.service";
 import { MaterialsState } from "./materials.reducer";
 import { MaterialsPageActions } from "./materials.actions";
+import { VerarbeitungsState } from "./verarbeitungs.reducer";
+import { VerarbeitungsPageActions } from "./verarbeitungs.actions";
+import { EnergierueckgewinnungsState } from "./energierueckgewinnungs.reducer";
+import { EnergierueckgewinnungsPageActions } from "./energierueckgewinnungs.actions";
+import { TransportmittelsState } from "./transportmittels.reducer";
+import { TransportmittelsPageActions } from "./transportmittels.actions";
 
 @Injectable()
 export class UserEffects {
   constructor(private actions$: Actions,
     private userService: UserService,
     private router: Router,
-    private materialStore: Store<MaterialsState>
+    private materialStore: Store<MaterialsState>,
+    private verarbeitungStore: Store<VerarbeitungsState>,
+    private energierueckgewinnungsStore: Store<EnergierueckgewinnungsState>,
+    private transportmittelsStore: Store<TransportmittelsState>
   ){}
 
   registerUser$ = createEffect(() => 
@@ -55,7 +64,13 @@ export class UserEffects {
         UserAPIActions.userLoginSuccess,
         UserAPIActions.userRegistrationSuccess
       ),
-      tap(() => this.materialStore.dispatch(MaterialsPageActions.loadMaterials())),
+      tap(() => {
+        this.materialStore.dispatch(MaterialsPageActions.loadMaterials())
+        this.verarbeitungStore.dispatch(VerarbeitungsPageActions.loadVerarbeitungs())
+        this.energierueckgewinnungsStore.dispatch(EnergierueckgewinnungsPageActions.loadEnergierueckgewinnungs())
+        this.transportmittelsStore.dispatch(TransportmittelsPageActions.loadTransportmittels())
+        console.log("Load Verabeitungs fired")
+      }),
       tap(() => this.router.navigate(['/verpackung/list']))
     ),
     { dispatch: false }

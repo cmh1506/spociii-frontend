@@ -15,6 +15,6 @@ COPY --from=node /app/dist/frontend /usr/share/nginx/html
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 # docker build -t spociii-frontend .
-# docker build -t cmh1506/spociii-frontend:1.0.29 .
-# docker push cmh1506/spociii-frontend:1.0.29
-# docker run -d -p 8080:80 cmh1506/spociii-frontend:1.0.29
+# docker build -t cmh1506/spociii-frontend:1.0.34 .
+# docker push cmh1506/spociii-frontend:1.0.34
+# docker run -d -p 8080:80 cmh1506/spociii-frontend:1.0.34

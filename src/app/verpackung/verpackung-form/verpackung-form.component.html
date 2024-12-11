@@ -43,7 +43,7 @@
                 <mat-form-field class="mat-verw-form-input">
                   <mat-label>Verarbeitung</mat-label>
                   <mat-select formControlName="verarbeitungId">
-                    <mat-option *ngFor="let verarbeitung of apiService.verarbeitungs$ | async;"
+                    <mat-option *ngFor="let verarbeitung of verarbeitungs$ | async;"
                       value="{{verarbeitung._id}}">
                       {{verarbeitung.name}}
                     </mat-option>
@@ -56,7 +56,7 @@
                 <mat-form-field class="mat-verw-form-input">
                   <mat-label>Entsorgung</mat-label>
                   <mat-select formControlName="energierueckgewinnungId">
-                    <mat-option *ngFor="let energierueckgewinnung of apiService.energierueckgewinnungs$ | async;"
+                    <mat-option *ngFor="let energierueckgewinnung of energierueckgewinnungs$ | async;"
                       value="{{energierueckgewinnung._id}}">
                       {{energierueckgewinnung.name}}
                     </mat-option>
@@ -69,7 +69,7 @@
                 <mat-form-field appearance="fill" class="mat-verw-form-input">
                   <mat-label>Transportmittel</mat-label>
                   <mat-select formControlName="transportmittelId">
-                    <mat-option *ngFor="let transportmittel of apiService.transportmittels$| async"
+                    <mat-option *ngFor="let transportmittel of transportmittels$| async"
                       value="{{transportmittel._id}}">
                       {{transportmittel.name}}
                     </mat-option>

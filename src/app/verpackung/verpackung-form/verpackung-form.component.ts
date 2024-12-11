@@ -26,6 +26,10 @@ export class VerpackungFormComponent implements OnInit {
   }
 
   materials$ = this.apiService.materials$
+  verarbeitungs$ = this.apiService.verarbeitungs$
+  energierueckgewinnungs$ = this.apiService.energierueckgewinnungs$
+  transportmittels$ = this.apiService.transportmittels$
+
   verpackung!: Verpackung
 
   materialCO2Aufwand: number = 0;

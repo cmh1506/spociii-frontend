@@ -18,6 +18,12 @@ import { UserService } from './user.service';
 import { UserModule } from './user/user.module';
 import { environment } from '../environments/environment.prod';
 import { ApiService } from './api.service';
+import { VerarbeitungEffects } from './+state/verarbeitungs.effects';
+import { verarbeitungsReducer } from './+state/verarbeitungs.reducer';
+import { energierueckgewinnungsReducer } from './+state/energierueckgewinnungs.reducer';
+import { EnergierueckgewinnungEffects } from './+state/energierueckgewinnungs.effects';
+import { TransportmittelEffects } from './+state/transportmittels.effects';
+import { transportmittelsReducer } from './+state/transportmittels.reducer';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,9 @@ import { ApiService } from './api.service';
     UserModule,
     StoreModule.forRoot({router: routerReducer,
       materials: materialsReducer,
+      verarbeitungs: verarbeitungsReducer,
+      energierueckgewinnungs: energierueckgewinnungsReducer,
+      transportmittels: transportmittelsReducer,
       user: userReducer
     }),
     StoreDevtoolsModule.instrument({
@@ -39,7 +48,7 @@ import { ApiService } from './api.service';
       maxAge: 25,
       logOnly: environment.production
     }),
-    EffectsModule.forRoot([MaterialEffects, UserEffects]),
+    EffectsModule.forRoot([MaterialEffects, UserEffects, VerarbeitungEffects, EnergierueckgewinnungEffects, TransportmittelEffects]),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [ApiService, UserService, {
