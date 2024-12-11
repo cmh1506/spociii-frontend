@@ -34,5 +34,6 @@
   <button mat-button *ngIf="!(userService.isAuthenticated | async)" routerLink="/login">Login</button>
   <button mat-button *ngIf="(userService.isAuthenticated | async)" (click)="userService.logout()">Log out</button>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
 
