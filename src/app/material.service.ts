@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Material } from './models/material';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, shareReplay, throwError } from 'rxjs';
 import { environment } from '../environments/environment.prod';
 
 @Injectable({
@@ -17,6 +17,9 @@ export class MaterialService {
 
   getAll(): Observable<Material[]> {
     return this.http.get<Material[]>(this.path + '/material')
+    .pipe(
+      shareReplay(1),
+    )
   }
 
   getById(id: number) {

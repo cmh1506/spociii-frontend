@@ -165,20 +165,20 @@
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.co2AufwandVerarbeitung | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="energieAufwandVerarbeitung">
-          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.energieAufwandVerarbeitung | number: '1.2-2'}}
           </td>
         </ng-container>
         <ng-container matColumnDef="verbrennungCo2Eq">
-          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.verbrennungCo2Eq | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="verbrennungENutzEnergie">
-          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.verbrennungENutzEnergie | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="gutschriftVerbrennungCo2Eq">
-          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.gutschriftVerbrennungCo2Eq | number: '1.2-2'}}
           </td>
         </ng-container>
@@ -187,7 +187,7 @@
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.transportCo2Eq | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="transportEnergie">
-          <th *matHeaderCellDef mat-header-cell>CO2-eq. [g]</th>
+          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.transportEnergie | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="indirectco2Biofuel">
@@ -196,11 +196,11 @@
         </ng-container>
 
         <ng-container matColumnDef="verbrennungBioCo2Eq">
-          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <th *matHeaderCellDef mat-header-cell>Bio CO2-eq. [g]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.verbrennungBioCo2Eq | number: '1.2-2'}} </td>
         </ng-container>
         <ng-container matColumnDef="herstellungBioCo2Eq">
-          <th *matHeaderCellDef mat-header-cell>Energie [kJ]</th>
+          <th *matHeaderCellDef mat-header-cell>Bio CO2-eq. [g]</th>
           <td *matCellDef="let berechnung" mat-cell> {{berechnung.herstellungBioCo2Eq | number: '1.2-2'}} </td>
         </ng-container>
 
@@ -210,18 +210,23 @@
           </th>
         </ng-container>
         <ng-container matColumnDef="Verarbeitung-group">
-          <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">Verarbeitung</th>
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Verarbeitung</th>
         </ng-container>
         <ng-container matColumnDef="Entsorgung-group">
-          <th mat-header-cell *matHeaderCellDef [attr.colspan]="3">Entsorgung</th>
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Entsorgung</th>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="['Material-group', 'Verarbeitung-group', 'Entsorgung-group']"></tr>
-
-        <ng-container matColumnDef="Material">
-          <th mat-header-cell *matHeaderCellDef [attr.colspan]="11">Material</th>
+        <ng-container matColumnDef="Gutschrift-group">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="1">Gutschrift aus Verbrennung</th>
         </ng-container>
+        <ng-container matColumnDef="Transport-group">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Transport</th>
+        </ng-container>
+        <ng-container matColumnDef="Bioco2-group">
+          <th mat-header-cell *matHeaderCellDef [attr.colspan]="3">Bio CO2</th>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['Material-group', 'Verarbeitung-group', 'Entsorgung-group', 'Gutschrift-group', 'Transport-group', 'Bioco2-group']"></tr>
 
-        <tr mat-header-row *matHeaderRowDef="['Material']"></tr>
+        
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
         <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
       </table>

@@ -49,10 +49,10 @@ export class VerpackungFormComponent implements OnInit {
 
   umweltGesamt$!: Observable<Object[]> 
 
-  displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'energieAufwandVerarbeitung',
+  displayedColumns: string[] = ['material', 'materialCO2Eq', 'materialEnergie', 'co2AufwandVerarbeitung', 'energieAufwandVerarbeitung',
     'verbrennungCo2Eq', 'verbrennungENutzEnergie', 'gutschriftVerbrennungCo2Eq',
-    'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 'co2AufwandVerarbeitung',
-    'verbrennungBioCo2Eq', 'herstellungBioCo2Eq']
+    'transportCo2Eq', 'transportEnergie', 'indirectco2Biofuel', 
+    /* 'verbrennungBioCo2Eq', 'herstellungBioCo2Eq' */]
 
     displayedColumnsGesamt: string[] = ['name', 'co2', 'energie']
 
