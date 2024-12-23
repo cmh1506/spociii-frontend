@@ -24,10 +24,18 @@ import { energierueckgewinnungsReducer } from './+state/energierueckgewinnungs.r
 import { EnergierueckgewinnungEffects } from './+state/energierueckgewinnungs.effects';
 import { TransportmittelEffects } from './+state/transportmittels.effects';
 import { transportmittelsReducer } from './+state/transportmittels.reducer';
+import {  MaterialFormComponent } from './material/material-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MaterialFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +58,12 @@ import { transportmittelsReducer } from './+state/transportmittels.reducer';
     }),
     EffectsModule.forRoot([MaterialEffects, UserEffects, VerarbeitungEffects, EnergierueckgewinnungEffects, TransportmittelEffects]),
     StoreRouterConnectingModule.forRoot(),
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule,
   ],
   providers: [ApiService, UserService, {
     provide: HTTP_INTERCEPTORS,

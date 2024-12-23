@@ -25,7 +25,9 @@ export class VerpackungFormComponent implements OnInit {
     //this.materialStore.dispatch(MaterialsPageActions.loadMaterials()) 
   }
 
-  materials$ = this.apiService.materials$
+  materials$ = this.apiService.materials$.pipe(
+    tap((m) => console.log(m))
+  )
   verarbeitungs$ = this.apiService.verarbeitungs$
   energierueckgewinnungs$ = this.apiService.energierueckgewinnungs$
   transportmittels$ = this.apiService.transportmittels$
