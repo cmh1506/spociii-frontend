@@ -24,7 +24,7 @@ import { energierueckgewinnungsReducer } from './+state/energierueckgewinnungs.r
 import { EnergierueckgewinnungEffects } from './+state/energierueckgewinnungs.effects';
 import { TransportmittelEffects } from './+state/transportmittels.effects';
 import { transportmittelsReducer } from './+state/transportmittels.reducer';
-import {  MaterialFormComponent } from './material/material-form.component';
+import { MaterialFormComponent } from './material/material-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,8 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MaterialFormComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     SharedModule,
     UserModule,
-    StoreModule.forRoot({router: routerReducer,
+    StoreModule.forRoot({
+      router: routerReducer,
       materials: materialsReducer,
       verarbeitungs: verarbeitungsReducer,
       energierueckgewinnungs: energierueckgewinnungsReducer,

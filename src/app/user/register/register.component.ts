@@ -5,6 +5,7 @@ import { UserState } from '../../+state/user.reducer';
 import { selectUserErrorMessage } from '../../+state/user.selectors';
 import { UserPageActions } from '../../+state/user.actions';
 import { User } from '../../models/user';
+import { Role } from '../../models/role';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,6 +22,7 @@ export class RegisterComponent {
     email: '',
     pwd: '',
     name: '',
+    role: Role.Basic
   })
 
   registerUser() {

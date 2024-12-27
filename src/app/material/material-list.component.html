@@ -1,0 +1,10 @@
+<div *ngIf="(errorMessage$) !== ''">
+  Error: {{errorMessage$}}
+</div>
+
+
+<div *ngFor="let material of materials$ | async">
+  <mat-card [routerLink]="['/material/', material['_id']]" style="cursor: pointer;">
+    <mat-card-content>{{material["name"]}}</mat-card-content>
+  </mat-card>
+</div>

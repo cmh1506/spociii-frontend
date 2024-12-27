@@ -1,3 +1,5 @@
+import { Role } from "./role";
+
 export interface User {
   email: string;
   pwd: string;
@@ -11,4 +13,5 @@ export interface LoginInfo {
 
 export interface Token {
   token: string
+  role: Role
 }

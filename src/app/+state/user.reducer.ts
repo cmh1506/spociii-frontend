@@ -1,16 +1,19 @@
 import { createReducer, on } from "@ngrx/store"
 import { UserAPIActions, UserPageActions } from "./user.actions"
 import { Token } from "../models/user"
+import { Role } from "../models/role"
 
 export interface UserState {
   token: Token | null
   errorMessage: string
   authenticated: boolean
+  admin: boolean
 }
 const initialState: UserState = {
   token: null,
   errorMessage: '',
-  authenticated: false
+  authenticated: false,
+  admin: false
 }
 
 export const userReducer = createReducer(
@@ -19,7 +22,8 @@ export const userReducer = createReducer(
     ...state,
     token: token,
     errorMessage: '',
-    authenticated: true
+    authenticated: true,
+    admin: (token.role.toString() === 'Admin')
   })),
   on(UserAPIActions.userRegistrationFailure, (state: UserState, {message}) => ({
     ...state,
@@ -31,7 +35,8 @@ export const userReducer = createReducer(
     ...state,
     token: token,
     errorMessage: '',
-    authenticated: true
+    authenticated: true,
+    admin: (token.role.toString() === 'Admin')
   })),
   on(UserAPIActions.userLoginFailure, (state: UserState, {message}) => ({
     ...state,
@@ -43,6 +48,7 @@ export const userReducer = createReducer(
     ...state,
     token: null,
     errorMessage: '',
-    authenticated: false
+    authenticated: false,
+    admin: false
   })),
 )

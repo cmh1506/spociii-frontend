@@ -30,7 +30,7 @@ export class MaterialService {
 
   add( material: Material): Observable<Material> {
     return this.http
-      .post<Material>(this.materialsAPIUrl, material)
+      .post<Material>(this.path + '/material', material)
       .pipe(catchError(this.handleError));
   }
 

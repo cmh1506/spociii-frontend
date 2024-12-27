@@ -9,6 +9,11 @@ export const selectUserToken = createSelector(
   ({ token }) => token?.token
 )
 
+export const selectAdmin = createSelector(
+  selectUserState,
+  ({ admin }) => admin
+)
+
 export const selectUserErrorMessage = createSelector(
   selectUserState,
   ({ errorMessage }) => errorMessage
