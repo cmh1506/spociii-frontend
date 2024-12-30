@@ -1,0 +1,13 @@
+.full-screen{
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+}
+.mat-verw-form-input{
+  padding: 5px;
+}
+
+.eingabezeile {
+  display: flex;
+  justify-content: space-between;
+}

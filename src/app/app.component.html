@@ -29,11 +29,11 @@
       <button mat-menu-item routerLink="/users">Benutzer</button>
     </button>
   </mat-menu>
-  <span style="flex: 1 1 auto;"></span>
+  <span class="spacer"></span>
+  <img src="../assets/images/logo.png" alt="Girl in a jacket" width="50" height="50">
   <button mat-button *ngIf="!(userService.isAuthenticated | async)" routerLink="/register">Register</button>
   <button mat-button *ngIf="!(userService.isAuthenticated | async)" routerLink="/login">Login</button>
   <button mat-button *ngIf="(userService.isAuthenticated | async)" (click)="userService.logout()">Log out</button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-

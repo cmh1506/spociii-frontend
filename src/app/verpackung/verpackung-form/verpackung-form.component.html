@@ -1,7 +1,8 @@
+<mat-card class="full-screen">
 <mat-tab-group>
   <mat-tab label="Datenerfassung" class="mat-tabs">
     <div class="wrapper">
-      <form [formGroup]="verpackungForm">
+      <form [formGroup]="verpackungForm" class="full-screen">
         <section>
           <br>
           <mat-form-field class="mat-verw-form-input" required>
@@ -19,7 +20,7 @@
           <div formArrayName="materialverwendungs">
             <div *ngFor="let mv of verpackungForm.controls.materialverwendungs.controls; let i=index"
               [formGroupName]="i" class="flex-column">
-              <div class="flex-group">
+              <div class="eingabezeile">
                 <mat-form-field class="mat-verw-form-input">
                   <mat-label>Material</mat-label>
                   <mat-select formControlName="materialId">
@@ -239,3 +240,4 @@
     </div>
   </mat-tab>
 </mat-tab-group>
+</mat-card>
