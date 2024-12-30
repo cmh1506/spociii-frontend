@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      Neues Material anlegen:
+      {{title}}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -11,17 +11,17 @@
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" name="name" placeholder="name" type="text">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Bio CO<sub>2</sub> Verbrennung</mat-label>
         <input matInput formControlName="bioco2verbrennung" name="bioco2verbrennung" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Bio Fuel CO<sub>2</sub></mat-label>
         <input matInput formControlName="bio_fuelco2" name="bio_fuelco2" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Bio CO<sub>2</sub> Prod</mat-label>
         <input matInput formControlName="bioco2prod" name="bioco2prod" placeholder="0" type="number">
@@ -31,17 +31,17 @@
         <mat-label>CO<sub>2</sub> Recycling</mat-label>
         <input matInput formControlName="co2recycling" name="co2recycling" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>CO<sub>2</sub> Verbrennung</mat-label>
         <input matInput formControlName="co2verbrennung" name="co2verbrennung" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Dichte</mat-label>
         <input matInput formControlName="dichte" name="dichte" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Energie Recycling</mat-label>
         <input matInput formControlName="energie_recycling" name="energie_recycling" placeholder="0" type="number">
@@ -51,17 +51,17 @@
         <mat-label>Fossiles</mat-label>
         <input matInput formControlName="fossiles" name="fossiles" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Heizenergie</mat-label>
         <input matInput formControlName="heizenergie" name="heizenergie" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Production CO<sub>2</sub></mat-label>
         <input matInput formControlName="productionCO2" name="productionCO2" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Prozessenergie</mat-label>
         <input matInput formControlName="prozessenergie" name="prozessenergie" placeholder="0" type="number">
@@ -71,17 +71,17 @@
         <mat-label>R Rate Herstellung</mat-label>
         <input matInput formControlName="r_rate_herstellung" name="r_rate_herstellung" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Recyclat 2. Mal</mat-label>
         <input matInput formControlName="recyclat_2te_mal" name="recyclat_2te_mal" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>Recyclierbar</mat-label>
         <input matInput formControlName="recyclierbar" name="recyclierbar" placeholder="0" type="number">
       </mat-form-field>
-      <br>
+      
       <mat-form-field class="register-full-width">
         <mat-label>CO<sub>2</sub> Deponie</mat-label>
         <input matInput formControlName="co2_deponie" name="co2_deponie" placeholder="0" type="number">
@@ -94,7 +94,7 @@
       <br> -->
       <br>
 
-      <button (click)="saveMaterial()" mat-flat-button color="primary">Speichern</button>
+      <button type="submit" mat-flat-button color="primary">Speichern</button>
     </form>
   </mat-card-content>
 </mat-card>

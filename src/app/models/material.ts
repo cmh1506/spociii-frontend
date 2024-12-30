@@ -1,7 +1,7 @@
 export interface Material {  
   _id: string
   name: string,
-  a_wert_pef: number,
+  /* a_wert_pef: number, */
   bioco2verbrennung: number,
   bio_fuelco2: number,
   bioco2prod: number,

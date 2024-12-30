@@ -3,8 +3,83 @@
 </div>
 
 
-<div *ngFor="let material of materials$ | async">
+<!-- <div *ngFor="let material of materials$ | async">
   <mat-card [routerLink]="['/material/', material['_id']]" style="cursor: pointer;">
     <mat-card-content>{{material["name"]}}</mat-card-content>
   </mat-card>
+</div> -->
+
+<div class="wrapper">
+  <button mat-menu-item routerLink="/material/add">Neues Material Anlegen</button>
+  <table id="materialTable" mat-table [dataSource]="materials$" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell>Name</th>
+      <td *matCellDef="let m" mat-cell [routerLink]="['/material/', m['_id']]" style="cursor: pointer;"> {{m.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bioco2verbrennung">
+      <th *matHeaderCellDef mat-header-cell>Bio CO<sub>2</sub> Verbrennung</th>
+      <td *matCellDef="let m" mat-cell> {{m.bioco2verbrennung | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bio_fuelco2">
+      <th *matHeaderCellDef mat-header-cell>Bio Fuel CO<sub>2</sub></th>
+      <td *matCellDef="let m" mat-cell> {{m.bio_fuelco2 | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bioco2prod">
+      <th *matHeaderCellDef mat-header-cell>Bio CO<sub>2</sub> Prod</th>
+      <td *matCellDef="let m" mat-cell> {{m.bioco2prod | number : '1.2-2'}} </td>
+    </ng-container>   
+    <ng-container matColumnDef="co2recycling">
+      <th *matHeaderCellDef mat-header-cell>CO<sub>2</sub> Recycling</th>
+      <td *matCellDef="let m" mat-cell> {{m.co2recycling | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="co2verbrennung">
+      <th *matHeaderCellDef mat-header-cell>CO<sub>2</sub> Verbrennung</th>
+      <td *matCellDef="let m" mat-cell> {{m.co2verbrennung | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="dichte">
+      <th *matHeaderCellDef mat-header-cell>Dichte</th>
+      <td *matCellDef="let m" mat-cell> {{m.dichte | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="energie_recycling">
+      <th *matHeaderCellDef mat-header-cell>Energie Recycling</th>
+      <td *matCellDef="let m" mat-cell> {{m.energie_recycling | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fossiles">
+      <th *matHeaderCellDef mat-header-cell>Fossiles</th>
+      <td *matCellDef="let m" mat-cell> {{m.fossiles | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="heizenergie">
+      <th *matHeaderCellDef mat-header-cell>Heizenergie</th>
+      <td *matCellDef="let m" mat-cell> {{m.heizenergie | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="productionCO2">
+      <th *matHeaderCellDef mat-header-cell>Production CO<sub>2</sub></th>
+      <td *matCellDef="let m" mat-cell> {{m.productionCO2 | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="prozessenergie">
+      <th *matHeaderCellDef mat-header-cell>Prozessenergie</th>
+      <td *matCellDef="let m" mat-cell> {{m.prozessenergie | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="r_rate_herstellung">
+      <th *matHeaderCellDef mat-header-cell>R Rate Herstellung</th>
+      <td *matCellDef="let m" mat-cell> {{m.r_rate_herstellung | number : '1.2-2'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="recyclat_2te_mal">
+      <th *matHeaderCellDef mat-header-cell>Recyclat 2. Mal</th>
+      <td *matCellDef="let m" mat-cell> {{m.recyclat_2te_mal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="recyclierbar">
+      <th *matHeaderCellDef mat-header-cell>Recyclierbar</th>
+      <td *matCellDef="let m" mat-cell> {{m.recyclierbar}} </td>
+    </ng-container>
+    <ng-container matColumnDef="co2_deponie">
+      <th *matHeaderCellDef mat-header-cell>CO<sub>2</sub> Deponie</th>
+      <td *matCellDef="let m" mat-cell> {{m.co2_deponie | number : '1.2-2'}}</td>
+    </ng-container>
+    
+    
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+  
 </div>

@@ -15,6 +15,10 @@ export class MaterialListComponent {
     ){}
   
     materials$ = this.store.select(selectMaterials)
+    displayedColumns = ['name', 'bioco2verbrennung', 'bio_fuelco2', 'bioco2prod', 'co2recycling',
+      'co2verbrennung', 'dichte', 'energie_recycling', 'fossiles', 'heizenergie', 'productionCO2',
+      'prozessenergie', 'r_rate_herstellung', 'recyclat_2te_mal', 'recyclierbar', 'co2_deponie'
+    ];
     errorMessage$ = ""/* this.store.select(selectMaterialsErrorMessage) */
   
     ngOnInit(): void {

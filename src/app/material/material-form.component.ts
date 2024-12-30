@@ -22,11 +22,15 @@ export class MaterialFormComponent implements OnInit {
   ) { }
   material$ = this.store.select(selectMaterialById)
   material = toSignal(this.material$)
+  title: string = "Neues Material anlegen:"
 
   ngOnInit(): void {
     this.material$.subscribe((m) => {
       if (m) {
         this.materialForm.setValue(m)
+        if (m.name) {
+          this.title = `Material ${m.name} editieren:`
+        }
       }
     })
   }
@@ -36,7 +40,7 @@ export class MaterialFormComponent implements OnInit {
   materialForm = this.fb.nonNullable.group({
   _id: '0',
   name: '',
-  a_wert_pef: 0,
+  /* a_wert_pef: 0, */
   bioco2verbrennung: 0,
   bio_fuelco2: 0,
   bioco2prod: 0,
@@ -59,8 +63,13 @@ export class MaterialFormComponent implements OnInit {
   saveMaterial() {
     if (this.materialForm.valid) {
       if (this.materialForm.dirty) {
-        const material: Material = { ...this.materialForm.value, _id: '0' } as Material
-        this.store.dispatch(MaterialsPageActions.addMaterial({ material }))
+        const material: Material = { ...this.materialForm.value } as Material
+        if (material._id === '0') {
+          this.store.dispatch(MaterialsPageActions.addMaterial({ material }))
+        } else {
+          this.store.dispatch(MaterialsPageActions.updateMaterial({ material }))
+        }
+        
       }
     }
   }

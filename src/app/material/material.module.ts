@@ -24,7 +24,7 @@ const routes = [
     component: MaterialFormComponent
   },
   {
-    path: 'edit',
+    path: 'add',
     canActivate: [adminGuard],
     component: MaterialFormComponent
   },

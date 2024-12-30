@@ -12,6 +12,8 @@ import {
 } from 'rxjs';
 import { MaterialsAPIActions, MaterialsPageActions } from './materials.actions';
 import { MaterialService } from '../material.service';
+import { Store } from '@ngrx/store';
+import { MaterialsState } from './materials.reducer';
 
 @Injectable()
 export class MaterialEffects {
@@ -94,7 +96,10 @@ export class MaterialEffects {
           MaterialsAPIActions.materialUpdatedSuccess,
           MaterialsAPIActions.materialDeletedSuccess
         ),
-        tap(() => this.router.navigate(['/materials']))
+        tap(() => {
+          this.store.dispatch(MaterialsPageActions.loadMaterials())
+          this.router.navigate(['/material'])          
+        })
       ),
     { dispatch: false }
   );
@@ -102,6 +107,7 @@ export class MaterialEffects {
   constructor(
     private materialService: MaterialService,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
+    private store: Store<MaterialsState>
   ) {}
 }

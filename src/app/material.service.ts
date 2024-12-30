@@ -17,9 +17,9 @@ export class MaterialService {
 
   getAll(): Observable<Material[]> {
     return this.http.get<Material[]>(this.path + '/material')
-    .pipe(
+    /* .pipe(
       shareReplay(1),
-    )
+    ) */
   }
 
   getById(id: number) {
@@ -36,12 +36,12 @@ export class MaterialService {
 
   update(material: Material): Observable<Material> {
     return this.http
-      .put<Material>(this.materialsAPIUrl, material)
+      .put<Material>(this.path + '/material/' + material._id, material)
       .pipe(catchError(this.handleError));
   }
 
   delete(id: number): Observable<unknown> {
-    const url = `${this.materialsAPIUrl}/${id}`;
+    const url = `${this.path + '/material/'}/${id}`;
     return this.http.delete(url).pipe(catchError(this.handleError));
   }
 
