@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { UserState } from "./user.reducer";
+import { getRouterSelectors } from '@ngrx/router-store';
 
 export const selectUserState =
   createFeatureSelector<UserState>('user')
@@ -7,6 +8,11 @@ export const selectUserState =
 export const selectUserToken = createSelector(
   selectUserState,
   ({ token }) => token?.token
+)
+
+export const selectUsers = createSelector(
+  selectUserState,
+  ({ users }) => users
 )
 
 export const selectAdmin = createSelector(
@@ -22,4 +28,13 @@ export const selectUserErrorMessage = createSelector(
 export const selectUserAuthenticated = createSelector(
   selectUserState,
   ({ authenticated }) => authenticated
+)
+
+export const { selectRouteParams } = getRouterSelectors();
+
+export const selectUserById = createSelector(
+  selectRouteParams,
+  selectUserState,
+  ({ _id }, { users }) =>
+    users.find((user) => user._id === _id)  
 )

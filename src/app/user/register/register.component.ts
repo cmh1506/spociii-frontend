@@ -19,6 +19,7 @@ export class RegisterComponent {
   errorMessage$ = this.store.select(selectUserErrorMessage);
 
   registerForm = this.fb.nonNullable.group({
+    _id: '',
     email: '',
     pwd: '',
     name: '',

@@ -57,12 +57,42 @@ export class UserEffects {
     )
   )
 
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserPageActions.loadUsers),
+      concatMap(() =>
+        this.userService.getAll().pipe(
+          map((users) =>
+            UserAPIActions.usersLoadedSuccess({ users })
+          ),
+          catchError((error) =>
+            of(UserAPIActions.usersLoadedFail({ message: error }))
+          )
+        )
+      )
+    )
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserPageActions.updateUser),
+      concatMap(({ user }) =>
+        this.userService.update(user).pipe(
+          map(() => UserAPIActions.userUpdatedSuccess({ user })),
+          catchError((error) =>
+            of(UserAPIActions.userUpdatedFail({ message: error }))
+          )
+        )
+      )
+    )
+  );
+
   redirectToVerpackungsList = createEffect(
     () =>
     this.actions$.pipe(
       ofType(
         UserAPIActions.userLoginSuccess,
-        UserAPIActions.userRegistrationSuccess
+        UserAPIActions.userRegistrationSuccess        
       ),
       tap(() => {
         this.materialStore.dispatch(MaterialsPageActions.loadMaterials())
@@ -75,6 +105,17 @@ export class UserEffects {
     ),
     { dispatch: false }
   )  
+
+  redirectToUserList = createEffect(
+    () =>
+    this.actions$.pipe(
+      ofType(
+        UserAPIActions.userUpdatedSuccess       
+      ),      
+      tap(() => this.router.navigate(['/user-list']))
+    ),
+    { dispatch: false }
+  )
 
 }
 

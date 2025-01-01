@@ -1,9 +1,11 @@
 import { Role } from "./role";
 
 export interface User {
+  _id: string
   email: string;
   pwd: string;
   name: string;
+  role: Role;
 }
 
 export interface LoginInfo {

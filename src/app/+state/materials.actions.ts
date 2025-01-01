@@ -5,7 +5,6 @@ import { Material } from "../models/material";
 export const MaterialsPageActions = createActionGroup({
   source: 'Materials Page',
   events: {
-    'Toggle Show Material Code': emptyProps(),
     'Load Materials': emptyProps(),
     'Add Material': props<{material: Material}>(),
     'Update Material': props<{material: Material}>(),

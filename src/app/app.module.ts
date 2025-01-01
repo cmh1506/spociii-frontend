@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { UserService } from './user.service';
-import { UserModule } from './user/user.module';
 import { environment } from '../environments/environment.prod';
 import { ApiService } from './api.service';
 import { VerarbeitungEffects } from './+state/verarbeitungs.effects';
@@ -24,7 +23,6 @@ import { energierueckgewinnungsReducer } from './+state/energierueckgewinnungs.r
 import { EnergierueckgewinnungEffects } from './+state/energierueckgewinnungs.effects';
 import { TransportmittelEffects } from './+state/transportmittels.effects';
 import { transportmittelsReducer } from './+state/transportmittels.reducer';
-import { MaterialFormComponent } from './material/material-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,10 +32,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserListComponent,
+    UserFormComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,6 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    UserModule,
     StoreModule.forRoot({
       router: routerReducer,
       materials: materialsReducer,

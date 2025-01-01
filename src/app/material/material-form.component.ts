@@ -21,7 +21,6 @@ export class MaterialFormComponent implements OnInit {
     private store: Store<MaterialsState>
   ) { }
   material$ = this.store.select(selectMaterialById)
-  material = toSignal(this.material$)
   title: string = "Neues Material anlegen:"
 
   ngOnInit(): void {

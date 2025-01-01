@@ -21,6 +21,10 @@ export class UserService {
 
   path = environment.path + "/auth"
 
+  getAll(): Observable<User[]> {
+    return this.httpClient.get<User[]>(environment.path + '/users')
+  }
+
   registerUser(user: User): Observable<Token> {
     return this.httpClient.post<Token>(this.path + '/register', user)
       .pipe(catchError(this.handleError))
@@ -29,6 +33,13 @@ export class UserService {
   loginUser(loginInfo: LoginInfo): Observable<Token> {
     return this.httpClient.post<Token>(this.path + '/login', loginInfo)
       .pipe(catchError(this.handleError))
+  }
+  
+
+  update(user: User): Observable<User> {
+    return this.httpClient
+      .put<User>(environment.path + '/users/' + user._id, user)
+      .pipe(catchError(this.handleError));
   }
 
   get isAuthenticated() {
