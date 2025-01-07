@@ -3,15 +3,16 @@ import { VerpackungsAPIActions, VerpackungsPageActions } from "./verpackungs.act
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Verpackung } from "../../models/verpackung";
 import { Berechnung } from "../../models/berechnung";
+import { UserPageActions } from "../../+state/user.actions";
 
-export interface VerpackungsState extends EntityState<Verpackung>{
+export interface VerpackungsState extends EntityState<Verpackung> {
   errorMessage: string,
   berechnungs: Berechnung[]
 }
 
 export const adapter: EntityAdapter<Verpackung> = createEntityAdapter<Verpackung>({
   selectId: selectVerpackungsId
-  
+
 })
 
 export function selectVerpackungsId(a: Verpackung): string {
@@ -76,15 +77,22 @@ export const verpackungReducer = createReducer(
   })),
 
   on(VerpackungsAPIActions.berechnungsLoadedSuccess, (state, action) => {
-     return {
+    return {
       ...state,
       berechnungs: action.berechnungs
-    }}
+    }
+  }
   ),
   on(VerpackungsAPIActions.verpackungsLoadedFail, (state, { message }) => ({
     ...state,
     errorMessage: message,
   })),
+  on(UserPageActions.logoutUser, (state) =>
+    adapter.removeAll({
+      ...state,
+      berechnungs: []
+    })
+  ),
 )
 
 export const { selectAll, selectEntities } = adapter.getSelectors();

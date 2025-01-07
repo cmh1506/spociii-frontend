@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+co2rechner.key
+cert_co2rechner.cloud.crt

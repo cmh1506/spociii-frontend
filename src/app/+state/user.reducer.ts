@@ -51,7 +51,8 @@ export const userReducer = createReducer(
     token: null,
     errorMessage: '',
     authenticated: false,
-    admin: false
+    admin: false,
+    users: []
   })),
   on(UserAPIActions.usersLoadedSuccess, (state, { users }) => ({
     ...state,

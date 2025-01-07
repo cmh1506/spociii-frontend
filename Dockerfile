@@ -11,10 +11,11 @@ COPY ./dist/frontend/browser ./dist/frontend
 FROM nginx:alpine
 VOLUME /var/cache/nginx
 COPY --from=node /app/dist/frontend /usr/share/nginx/html
-#COPY ./dist/frontend ./dist/frontend
+COPY ./co2rechner.key /etc/nginx/co2rechner.key
+COPY ./cert_co2rechner.cloud.crt /etc/nginx/cert_co2rechner.cloud.crt
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
 
 # docker build -t spociii-frontend .
-# docker build -t cmh1506/spociii-frontend:1.0.37 .
-# docker push cmh1506/spociii-frontend:1.0.37
-# docker run -d -p 8080:80 cmh1506/spociii-frontend:1.0.37
+# docker build -t cmh1506/spociii-frontend:1.0.41 .
+# docker push cmh1506/spociii-frontend:1.0.41
+# docker run -d -p 8080:80 cmh1506/spociii-frontend:1.0.41
